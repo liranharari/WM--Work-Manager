@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="btn_menu_style" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@color/whiteOpacity</item>
+
+    </style>
+
+    <style name="btn_addCostumer_style" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@color/blueOpacity</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="btn_start_style" >
+        <item name="android:layout_width">@dimen/start_btn_width</item>
+        <item name="android:layout_height">@dimen/start_btn_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/greenOpacity</item>
+        <item name="android:layout_margin">@dimen/small</item>
+    </style>
+
+    <style name="btn_costumer_style" >
+        <item name="android:background">@color/whiteOpacity</item>
+        <item name="android:layout_weight">0.9</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/start_btn_height</item>
+        <item name="android:layout_margin">@dimen/small</item>
+    </style>
+
+
+    <style name="btn_login_style" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:background">@color/greenOpacity2</item>
+        <item name="android:layout_margin">@dimen/small</item>
+
+
+
+
+    </style>
+
+
+
+
+
+</resources>
