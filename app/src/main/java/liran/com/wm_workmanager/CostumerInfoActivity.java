@@ -29,7 +29,25 @@ public class CostumerInfoActivity extends AppCompatActivity {
         /////******get info about costumer
         ////************************
         //***************************
-        txtcostumerInfo.setText("לקוח 1/n כתובת:***** /n מייל:*****/n טלפון:-******* /n מס תיק:*******");
+        txtcostumerInfo.setText("לקוח 1" +
+                "\n" +
+                "כתובת: יצחק רבין 14" +
+                "\n" +
+                "טלפון: 0501234567" +
+                "\n" +
+                "מייל: costumer@example.com" +
+                "\n" +
+                "מספר תיק: 22015" +
+                "\n" +
+                "משרד איזורי: ****" +
+                "\n" +
+                "פקיד שומה: ****" +
+                "\n" +
+                "מס הכנסה: ****" +
+                "\n" +
+                "ביטוח לאומי:****" +
+                "\n" +
+                "מע''מ: *****");
 
         btnEditCostumer.setOnClickListener(new View.OnClickListener() {
             @Override

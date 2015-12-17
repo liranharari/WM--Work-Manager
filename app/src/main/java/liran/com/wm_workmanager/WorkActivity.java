@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 
@@ -15,6 +16,9 @@ public class WorkActivity extends AppCompatActivity {
 
     private Button btn_add_costumer;
     private Button btn_menu;
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
+    private Button swt1, swt2, swt3, swt4, swt5, swt6, swt7, swt8, swt9, swt10, swt11, swt12;
+
 
 
     @Override
@@ -26,6 +30,8 @@ public class WorkActivity extends AppCompatActivity {
 
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
         btn_menu=(Button) findViewById(R.id.btnMenu);
+
+
 
         if(!is_login)
         {
@@ -44,6 +50,54 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    @Override
+    public void onBackPressed()
+    {
+        finishAffinity(); ////////close all
+    }
+
+    public void costumerButtonClicked(View view) {
+        Intent costumerInfoAc= new Intent(this, CostumerInfoActivity.class);
+
+        if (view.getId() == R.id.btn1) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn2) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn3) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn4) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn5) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn6) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn7) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn8) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn9) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn10) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn11) {
+            startActivity(costumerInfoAc);
+        }
+        else if (view.getId() == R.id.btn12) {
+            startActivity(costumerInfoAc);
+        }
     }
 
 

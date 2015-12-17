@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         btn_login_manger= (Button) findViewById(R.id.btn_login_manager);
         btn_login_normal=(Button) findViewById(R.id.btn_login_normal);
 
+        if(WorkActivity.is_login)
+        {
+            startActivity(workAc);
+        }
+
         btn_login_normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

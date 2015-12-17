@@ -8,26 +8,30 @@
     tools:context="liran.com.wm_workmanager.CostumerInfoActivity">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        >
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textInfo"
             android:layout_gravity="center_horizontal"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_edit_costumer"/>
+            android:textSize="@dimen/abc_dialog_padding_material" />
 
     </LinearLayout>
 
-
+    <Button
+        android:layout_width="75dp"
+        style="@style/btn_edit_style"
+        android:layout_height="wrap_content"
+        android:text="@string/btnEdit"
+        android:id="@+id/btn_edit_costumer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+         />
 
 
 </RelativeLayout>
