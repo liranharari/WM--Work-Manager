@@ -29,6 +29,14 @@
         <item name="android:layout_margin">@dimen/small</item>
     </style>
 
+    <style name="btn_edit_style" >
+        <item name="android:layout_width">@dimen/start_btn_width</item>
+        <item name="android:layout_height">@dimen/start_btn_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/blueOpacity</item>
+        <item name="android:layout_margin">@dimen/small</item>
+    </style>
+
     <style name="btn_costumer_style" >
         <item name="android:background">@color/whiteOpacity</item>
         <item name="android:layout_weight">0.9</item>
