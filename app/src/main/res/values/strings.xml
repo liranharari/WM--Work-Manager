@@ -10,6 +10,7 @@
     <string name="username">שם משתמש</string>
     <string name="password">סיסמא</string>
     <string name="login">התחבר</string>
+    <string name="btnEdit">ערוך</string>
 
 
 </resources>

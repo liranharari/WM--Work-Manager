@@ -59,7 +59,7 @@
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/switch2"
+                    android:id="@+id/switch1"
                     android:textOn="@string/stop"
                     android:textOff="@string/start"
                     android:thumb="@drawable/switch_holo_light"
@@ -67,6 +67,7 @@
 
                 <Button
                     style="@style/btn_costumer_style"
+                    android:onClick="costumerButtonClicked"
                     android:text="לקוח 1"
                     android:id="@+id/btn1" />
                 <!--style="@style/btn_start_style"-->
@@ -89,15 +90,57 @@
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:id="@+id/switch2"
+                    android:textOn="@string/stop"
+                    android:textOff="@string/start"
+                    android:thumb="@drawable/switch_holo_light" />
+                <Button
+                    style="@style/btn_costumer_style"
+                    android:onClick="costumerButtonClicked"
+                    android:text="לקוח 1"
+                    android:id="@+id/btn2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/switch3"
                     android:textOn="@string/stop"
                     android:textOff="@string/start"
                     android:thumb="@drawable/switch_holo_light" />
                 <Button
                     style="@style/btn_costumer_style"
-
+                    android:onClick="costumerButtonClicked"
                     android:text="לקוח 1"
-                    android:id="@+id/btn2" />
+                    android:id="@+id/btn3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/switch4"
+                    android:textOn="@string/stop"
+                    android:textOff="@string/start"
+                    android:thumb="@drawable/switch_holo_light" />
+                <Button
+                    style="@style/btn_costumer_style"
+                    android:onClick="costumerButtonClicked"
+                    android:text="לקוח 1"
+                    android:id="@+id/btn4" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,9 +159,9 @@
                     android:thumb="@drawable/switch_holo_light" />
                 <Button
                     style="@style/btn_costumer_style"
-
+                    android:onClick="costumerButtonClicked"
                     android:text="לקוח 1"
-                    android:id="@+id/btn3" />
+                    android:id="@+id/btn5" />
             </LinearLayout>
 
             <LinearLayout
@@ -137,9 +180,9 @@
                     android:thumb="@drawable/switch_holo_light" />
                 <Button
                     style="@style/btn_costumer_style"
-
+                    android:onClick="costumerButtonClicked"
                     android:text="לקוח 1"
-                    android:id="@+id/btn4" />
+                    android:id="@+id/btn6" />
             </LinearLayout>
 
             <LinearLayout
@@ -158,9 +201,9 @@
                     android:thumb="@drawable/switch_holo_light" />
                 <Button
                     style="@style/btn_costumer_style"
-
+                    android:onClick="costumerButtonClicked"
                     android:text="לקוח 1"
-                    android:id="@+id/btn5" />
+                    android:id="@+id/btn7" />
             </LinearLayout>
 
             <LinearLayout
@@ -177,11 +220,12 @@
                     android:textOn="@string/stop"
                     android:textOff="@string/start"
                     android:thumb="@drawable/switch_holo_light" />
-                <Button
-                    style="@style/btn_costumer_style"
 
-                    android:text="לקוח 1"
-                    android:id="@+id/btn6" />
+                <Button
+                style="@style/btn_costumer_style"
+                    android:onClick="costumerButtonClicked"
+                android:text="לקוח 1"
+                android:id="@+id/btn8" />
             </LinearLayout>
 
             <LinearLayout
@@ -198,11 +242,12 @@
                     android:textOn="@string/stop"
                     android:textOff="@string/start"
                     android:thumb="@drawable/switch_holo_light" />
-                <Button
-                    style="@style/btn_costumer_style"
 
-                    android:text="לקוח 1"
-                    android:id="@+id/btn7" />
+                <Button
+                style="@style/btn_costumer_style"
+                    android:onClick="costumerButtonClicked"
+                android:text="לקוח 1"
+                android:id="@+id/btn9" />
             </LinearLayout>
 
             <LinearLayout
@@ -221,10 +266,10 @@
                     android:thumb="@drawable/switch_holo_light" />
 
                 <Button
-                style="@style/btn_costumer_style"
-
-                android:text="לקוח 1"
-                android:id="@+id/btn8" />
+                    style="@style/btn_costumer_style"
+                    android:onClick="costumerButtonClicked"
+                    android:text="לקוח 1"
+                    android:id="@+id/btn10" />
             </LinearLayout>
 
             <LinearLayout
@@ -244,9 +289,9 @@
 
                 <Button
                 style="@style/btn_costumer_style"
-
+                    android:onClick="costumerButtonClicked"
                 android:text="לקוח 1"
-                android:id="@+id/btn9" />
+                android:id="@+id/btn11" />
             </LinearLayout>
 
             <LinearLayout
@@ -265,52 +310,8 @@
                     android:thumb="@drawable/switch_holo_light" />
 
                 <Button
-                    style="@style/btn_costumer_style"
-
-                    android:text="לקוח 1"
-                    android:id="@+id/btn10" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal">
-
-
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/switch13"
-                    android:textOn="@string/stop"
-                    android:textOff="@string/start"
-                    android:thumb="@drawable/switch_holo_light" />
-
-                <Button
                 style="@style/btn_costumer_style"
-
-                android:text="לקוח 1"
-                android:id="@+id/btn11" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal">
-
-
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/switch14"
-                    android:textOn="@string/stop"
-                    android:textOff="@string/start"
-                    android:thumb="@drawable/switch_holo_light" />
-
-                <Button
-                style="@style/btn_costumer_style"
-
+                android:onClick="costumerButtonClicked"
                 android:text="לקוח 1"
                 android:id="@+id/btn12" />
             </LinearLayout>
