@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -31,6 +32,32 @@ public class WorkActivity extends AppCompatActivity {
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
         btn_menu=(Button) findViewById(R.id.btnMenu);
 
+        swt1= (Switch) findViewById(R.id.switch1);
+        swt2= (Switch) findViewById(R.id.switch2);
+        swt3= (Switch) findViewById(R.id.switch3);
+        swt4= (Switch) findViewById(R.id.switch4);
+        swt5= (Switch) findViewById(R.id.switch5);
+        swt6= (Switch) findViewById(R.id.switch6);
+        swt7= (Switch) findViewById(R.id.switch7);
+        swt8= (Switch) findViewById(R.id.switch8);
+        swt9= (Switch) findViewById(R.id.switch9);
+        swt10= (Switch) findViewById(R.id.switch10);
+        swt11= (Switch) findViewById(R.id.switch11);
+        swt12= (Switch) findViewById(R.id.switch12);
+
+        btn1= (Button) findViewById(R.id.btn1);
+        btn2= (Button) findViewById(R.id.btn2);
+        btn3= (Button) findViewById(R.id.btn3);
+        btn4= (Button) findViewById(R.id.btn4);
+        btn5= (Button) findViewById(R.id.btn5);
+        btn6= (Button) findViewById(R.id.btn6);
+        btn7= (Button) findViewById(R.id.btn7);
+        btn8= (Button) findViewById(R.id.btn8);
+        btn9= (Button) findViewById(R.id.btn9);
+        btn10= (Button) findViewById(R.id.btn10);
+        btn11= (Button) findViewById(R.id.btn11);
+        btn12= (Button) findViewById(R.id.btn12);
+
 
 
         if(!is_login)
@@ -46,6 +73,52 @@ public class WorkActivity extends AppCompatActivity {
 
             }
         });
+
+       //listener to all switches
+
+        CompoundButton.OnCheckedChangeListener multiListener = new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()){
+                    case R.id.switch1:
+                        if(isChecked)
+                            Toast.makeText(getApplicationContext(), "on", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.switch3:
+                        if(isChecked)
+                            Toast.makeText(getApplicationContext(), "on", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.switch2:
+                        if(isChecked)
+                            Toast.makeText(getApplicationContext(), "on", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        };
+
+        //on each switch
+        ((Switch) findViewById(R.id.switch1)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch2)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch3)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch4)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch5)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch6)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch7)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch8)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch9)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch10)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch11)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch12)).setOnCheckedChangeListener(multiListener);
+
+
+
+
 
 
 
@@ -99,6 +172,9 @@ public class WorkActivity extends AppCompatActivity {
             startActivity(costumerInfoAc);
         }
     }
+
+
+
 
 
 
