@@ -37,7 +37,7 @@
                                     android:id="@+id/txtName" />
 
                                 <EditText
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editName" />
                     </LinearLayout>
@@ -54,7 +54,7 @@
                                     android:id="@+id/txtAdress" />
 
                                 <EditText
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editAdress" />
                     </LinearLayout>
@@ -71,7 +71,7 @@
                                     android:id="@+id/txtPhone" />
 
                                 <EditText
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editPhone" />
                     </LinearLayout>
@@ -88,7 +88,7 @@
                                     android:id="@+id/txtMail" />
 
                                 <EditText
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editMail" />
                     </LinearLayout>
@@ -105,7 +105,7 @@
                                     android:id="@+id/txtCaseNum" />
 
                                 <EditText
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editCaseNum" />
 
@@ -124,7 +124,7 @@
                                     android:id="@+id/txtCaseNumDeductions" />
 
                                 <EditText
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editCaseNumDeductions" />
                     </LinearLayout>
@@ -144,7 +144,7 @@
                             android:id="@+id/txtIncomeTax" />
 
                         <EditText
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/editIncomeTax" />
                     </LinearLayout>
@@ -161,7 +161,7 @@
                             android:id="@+id/txtInsurance" />
 
                         <EditText
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/editInsurance" />
                     </LinearLayout>
@@ -180,7 +180,7 @@
                             android:id="@+id/txtVAT" />
 
                         <EditText
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/editVAT" />
                     </LinearLayout>
