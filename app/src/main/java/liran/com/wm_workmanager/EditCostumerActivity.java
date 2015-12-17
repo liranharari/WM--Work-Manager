@@ -2,8 +2,10 @@ package liran.com.wm_workmanager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditCostumerActivity extends AppCompatActivity {
 
@@ -27,6 +29,16 @@ public class EditCostumerActivity extends AppCompatActivity {
         editVAT=(EditText) findViewById(R.id.editVAT);
 
         btnSave= (Button) findViewById(R.id.btnSaveEditCostumer);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //// save changes!!!
+                Toast.makeText(getApplicationContext(), "השינויים נשמרו", Toast.LENGTH_LONG).show();
+                onBackPressed();
+
+            }
+        });
 
 
 
