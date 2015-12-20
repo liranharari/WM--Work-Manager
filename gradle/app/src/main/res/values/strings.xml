@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">WM- work manager</string>
+    <string name="add_costumer">+</string>
+    <string name="menu">תפריט</string>
+    <string name="btn1">לקוח 1</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="login_manager">הכנס כמנהל</string>
+    <string name="login_normal">כניסה רגילה</string>
+    <string name="username">שם משתמש</string>
+    <string name="password">סיסמא</string>
+    <string name="login">התחבר</string>
+    <string name="btnEdit">ערוך</string>
+    <string name="saveEditCostumer">שמור שינויים</string>
+    <string name="name">שם:</string>
+    <string name="adress">כתובת:</string>
+    <string name="phone">טלפון:</string>
+    <string name="mail">מייל:</string>
+    <string name="caseNum">מספר תיק:</string>
+    <string name="caseNumDeductions">מספר תיק ניכויים:</string>
+    <string name="incomeTax">מס הכנסה:</string>
+    <string name="insurance">ביטוח לאומי:</string>
+    <string name="VAT">מע"מ:</string>
+    <string name="addNewCostumer">הוסף</string>
+
+
+</resources>
