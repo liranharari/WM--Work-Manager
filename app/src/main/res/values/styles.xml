@@ -50,8 +50,14 @@
         <item name="android:layout_weight">0.2</item>
         <item name="android:background">@color/greenOpacity2</item>
         <item name="android:layout_margin">@dimen/small</item>
+    </style>
 
 
+
+    <style name="btn_menu_style" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:background">@color/blueOpacity</item>
+        <item name="android:layout_margin">@dimen/small</item>
 
 
     </style>

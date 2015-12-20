@@ -26,6 +26,10 @@
         </activity>
         <activity android:name=".AddNewCostumerActivity" >
         </activity>
+        <activity android:name=".MenuActivity" >
+        </activity>
+        <activity android:name=".WorkStatusActivity" >
+        </activity>
     </application>
 
 </manifest>

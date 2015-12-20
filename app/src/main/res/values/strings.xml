@@ -22,6 +22,7 @@
     <string name="insurance">ביטוח לאומי:</string>
     <string name="VAT">מע"מ:</string>
     <string name="addNewCostumer">הוסף</string>
+    <string name="sendToMail">שלח למייל שלי</string>
 
 
 </resources>
