@@ -39,9 +39,7 @@ public class CostumerInfoActivity extends AppCompatActivity {
                 "\n" +
                 "מספר תיק: 22015" +
                 "\n" +
-                "משרד איזורי: ****" +
-                "\n" +
-                "פקיד שומה: ****" +
+                "מספר תיק ניכויים: 22015" +
                 "\n" +
                 "מס הכנסה: ****" +
                 "\n" +

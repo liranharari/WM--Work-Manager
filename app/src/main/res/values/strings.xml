@@ -21,7 +21,7 @@
     <string name="incomeTax">מס הכנסה:</string>
     <string name="insurance">ביטוח לאומי:</string>
     <string name="VAT">מע"מ:</string>
-
+    <string name="addNewCostumer">הוסף</string>
 
 
 </resources>

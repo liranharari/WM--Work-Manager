@@ -20,14 +20,13 @@ public class WorkActivity extends AppCompatActivity {
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
     private Button swt1, swt2, swt3, swt4, swt5, swt6, swt7, swt8, swt9, swt10, swt11, swt12;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
 
         Intent loginAc = new Intent(this, MainActivity.class);
+        final Intent AddNewCostumerAc = new Intent(this, AddNewCostumerActivity.class);
 
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
         btn_menu=(Button) findViewById(R.id.btnMenu);
@@ -71,6 +70,13 @@ public class WorkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "menu pressed!!!!!!!!!!!!!!!!!", Toast.LENGTH_LONG).show();
 
+            }
+        });
+
+        btn_add_costumer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(AddNewCostumerAc);
             }
         });
 
