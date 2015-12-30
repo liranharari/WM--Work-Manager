@@ -11,15 +11,15 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        style="@style/btn_menu_style"
-        android:text="@string/WorkStatus"
+        style="@style/btn_menu_btns_style"
+        android:text="@string/workStatus"
         android:id="@+id/btn_work_status"
         />
 
     <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    style="@style/btn_menu_style"
+    style="@style/btn_menu_btns_style"
     android:text="@string/makeReminder"
     android:id="@+id/btn_make_reminder"
     android:layout_below="@+id/btn_work_status"
@@ -28,8 +28,8 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        style="@style/btn_menu_style"
-        android:text="@string/SendReminder"
+        style="@style/btn_menu_btns_style"
+        android:text="@string/sendReminder"
         android:id="@+id/btn_send_reminder"
         android:layout_below="@+id/btn_make_reminder"
         />
@@ -37,8 +37,8 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        style="@style/btn_menu_style"
-        android:text="@string/Options"
+        style="@style/btn_menu_btns_style"
+        android:text="@string/options"
         android:id="@+id/btn_options"
         android:layout_below="@+id/btn_send_reminder"
         />

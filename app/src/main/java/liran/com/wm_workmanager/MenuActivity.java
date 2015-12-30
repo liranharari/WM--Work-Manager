@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MenuActivity extends Activity {
 
@@ -24,6 +25,7 @@ public class MenuActivity extends Activity {
         btnSendReminder= (Button) findViewById(R.id.btn_send_reminder);
         btnOptions=(Button)findViewById(R.id.btn_options);
 
+        final Intent MakeReAc=new Intent(this, MakeReminderActivity.class);
 
         btnWorkStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +38,7 @@ public class MenuActivity extends Activity {
         btnMakeReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(MakeReAc);
             }
         });
 

@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".WorkStatusActivity" >
         </activity>
+        <activity android:name=".MakeReminderActivity" >
+        </activity>
     </application>
 
 </manifest>

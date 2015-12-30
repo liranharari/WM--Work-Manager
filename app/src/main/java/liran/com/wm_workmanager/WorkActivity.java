@@ -26,6 +26,8 @@ public class WorkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_work);
 
         Intent loginAc = new Intent(this, MainActivity.class);
+        final Intent menuAc = new Intent(this, MenuActivity.class);
+
         final Intent AddNewCostumerAc = new Intent(this, AddNewCostumerActivity.class);
 
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
@@ -68,7 +70,7 @@ public class WorkActivity extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "menu pressed!!!!!!!!!!!!!!!!!", Toast.LENGTH_LONG).show();
+                startActivity(menuAc);
 
             }
         });
