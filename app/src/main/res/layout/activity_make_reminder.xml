@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_costumer"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:background="@color/whiteVeryOpacity" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -38,15 +39,17 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="124dp"
+                android:layout_height="69dp"
                 android:id="@+id/editTxtReminderMessage"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:background="@color/whiteVeryOpacity" />
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
-                android:id="@+id/btn_date" />
+                android:id="@+id/btn_date"
+                android:layout_marginTop="15dp" />
 
             <Button
                 android:layout_width="fill_parent"
@@ -56,5 +59,14 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/makeReminder"
+        android:id="@+id/btn_save_reminder"
+        android:layout_marginBottom="58dp"
+        android:layout_alignBottom="@+id/scrollView2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

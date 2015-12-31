@@ -12,5 +12,9 @@
     <color name="blueOpacity">#7200b2ff</color>
     <color name="greenOpacity2">#7200ff0d</color>
     <color name="background">#e4e4e4</color>
+    <color name="cyan">#e700fff7</color>
+    <color name="whiteVeryOpacity">#30ffffff</color>
+
+
 
 </resources>
