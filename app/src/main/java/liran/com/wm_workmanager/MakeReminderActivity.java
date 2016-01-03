@@ -25,6 +25,7 @@ public class MakeReminderActivity extends Activity {
     static final int DATE_DIALOG_ID=0, TIME_DIALOG_ID=1;
 
     private Button btnSaveReminder;
+    private String costumer;
 
     private Button btnDate, btnTime;
 
@@ -56,6 +57,7 @@ public class MakeReminderActivity extends Activity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "reminder saved to the "+remDay+"/"+remMonth+"/"+ remDay+"\n"+
                                         "at " +remHour + ":" + remMinute , Toast.LENGTH_LONG).show();
+                onBackPressed();
             }
         });
 
@@ -150,7 +152,7 @@ public class MakeReminderActivity extends Activity {
         spinCostumer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                costumer= parent.getItemAtPosition(position).toString();
                 Toast.makeText(getBaseContext(),parent.getItemAtPosition(position).toString()+"" , Toast.LENGTH_LONG).show();
             }
 

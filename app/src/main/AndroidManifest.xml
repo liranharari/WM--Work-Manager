@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".MakeReminderActivity" >
         </activity>
+        <activity android:name=".SendReminderActivity" >
+        </activity>
     </application>
 
 </manifest>

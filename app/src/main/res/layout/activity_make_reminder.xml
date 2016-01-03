@@ -57,16 +57,19 @@
                 android:text="@string/time"
                 android:id="@+id/btn_time" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/makeReminder"
+                android:id="@+id/btn_save_reminder"
+                android:layout_marginBottom="0dp"
+                android:layout_alignBottom="@+id/scrollView2"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                style="@style/btn_edit_style" />
+
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/makeReminder"
-        android:id="@+id/btn_save_reminder"
-        android:layout_marginBottom="58dp"
-        android:layout_alignBottom="@+id/scrollView2"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
