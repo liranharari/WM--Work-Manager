@@ -26,6 +26,9 @@ public class MenuActivity extends Activity {
         btnOptions=(Button)findViewById(R.id.btn_options);
 
         final Intent MakeReAc=new Intent(this, MakeReminderActivity.class);
+        final Intent SendReAc=new Intent(this, SendReminderActivity.class);
+
+
 
         btnWorkStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +48,7 @@ public class MenuActivity extends Activity {
         btnSendReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(SendReAc);
 
             }
         });
