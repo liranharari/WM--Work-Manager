@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NormalLoginActivity extends Activity {
 
@@ -29,6 +30,11 @@ public class NormalLoginActivity extends Activity {
                 if(editCode.getText().toString().equals("code")){
                     WorkActivity.is_login = WorkActivity.NORMAL_LOGIN;
                     startActivity(workAc);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "קוד שגוי, נסה שוב", Toast.LENGTH_LONG).show();
+                    editCode.setText("");
                 }
 
             }

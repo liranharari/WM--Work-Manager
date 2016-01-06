@@ -61,7 +61,7 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
-        if(is_login== MANAGER_LOGIN)
+        if(is_login!= MANAGER_LOGIN)
         {
             btn_add_costumer.setVisibility(View.GONE);
             btn_menu.setVisibility(View.GONE);
