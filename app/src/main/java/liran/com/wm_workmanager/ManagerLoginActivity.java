@@ -38,7 +38,7 @@ public class ManagerLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(editPassword.getText().toString().equals("a")) {
-                    WorkActivity.is_login = true;
+                    WorkActivity.is_login = WorkActivity.MANAGER_LOGIN;
                     startActivity(workAc);
                 }
                 else

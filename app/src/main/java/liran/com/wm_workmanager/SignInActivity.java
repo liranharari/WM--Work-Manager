@@ -30,6 +30,7 @@ public class SignInActivity extends Activity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "new user "+ editMail.getText().toString()+
                                 "added succesfully", Toast.LENGTH_LONG).show();
+                WorkActivity.is_login=WorkActivity.MANAGER_LOGIN;
                 startActivity(workAc);
 
 

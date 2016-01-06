@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btn_login_normal=(Button) findViewById(R.id.btn_login_normal);
         btn_signIn=(Button) findViewById(R.id.btn_sign_in);
 
-        if(WorkActivity.is_login)
+        if(WorkActivity.is_login!=WorkActivity.NOT_LOGIN)
         {
             startActivity(workAc);
         }

@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 
 public class WorkActivity extends AppCompatActivity {
+    public final static int NORMAL_LOGIN=2, MANAGER_LOGIN=1, NOT_LOGIN=0;
 
-
-    public static boolean is_login=false;
+    public static int is_login=NOT_LOGIN;
 
     private Button btn_add_costumer;
     private Button btn_menu;
@@ -61,7 +61,7 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
-        if(!is_login)
+        if(is_login== MANAGER_LOGIN)
         {
             btn_add_costumer.setVisibility(View.GONE);
             btn_menu.setVisibility(View.GONE);

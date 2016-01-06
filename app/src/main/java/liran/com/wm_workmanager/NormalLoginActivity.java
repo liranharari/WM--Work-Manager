@@ -26,8 +26,11 @@ public class NormalLoginActivity extends Activity {
         btnNormalLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editCode.getText().toString().equals("code"))
+                if(editCode.getText().toString().equals("code")){
+                    WorkActivity.is_login = WorkActivity.NORMAL_LOGIN;
                     startActivity(workAc);
+                }
+
             }
         });
 
