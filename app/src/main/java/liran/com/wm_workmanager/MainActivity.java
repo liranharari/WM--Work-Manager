@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         final Intent workAc = new Intent(this, WorkActivity.class);
+        final Intent normalLoginAc = new Intent(this, NormalLoginActivity.class);
         final Intent managerloginAc = new Intent(this, ManagerLoginActivity.class);
         final Intent signInAc = new Intent(this, SignInActivity.class);
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btn_login_normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(workAc);
+                startActivity(normalLoginAc);
             }
         });
 
