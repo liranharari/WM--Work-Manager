@@ -31,6 +31,9 @@
     <string name="reminder">תזכורת:</string>
     <string name="date">תאריך</string>
     <string name="time">שעה</string>
+    <string name="signIn">הרשם!</string>
+    <string name="signin">Sign In</string>
+    <string name="code">קוד</string>
 
 
 </resources>
