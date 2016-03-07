@@ -22,7 +22,15 @@ class updateCustomer(webapp2.RequestHandler):
 		field6=self.request.get('field6')
 		
 		user = User.query(User.mail == mail).get()
-			
+		if not user:
+			self.error(403)
+			self.response.write('No user - access denied')
+			return
+		customer=Customer.query(Customer.name==name, Customer.user==user.mail).get()
+		if not customer:
+			self.error(402)
+			self.response.write('no customer')
+			return
 		Customer.updateCustomer(mail, name, newname, address, phone, email, field1, field2, field3, field4, field5, field6)
 		
 		self.response.write(json.dumps({"status": "OK"}))
@@ -38,6 +46,12 @@ class addCustomerhours(webapp2.RequestHandler):
 			self.error(403)
 			self.response.write('No user - access denied')
 			return
+		customer=Customer.query(Customer.name==name, Customer.user==user.mail).get()
+		if not customer:
+			self.error(402)
+			self.response.write('no customer')
+			return
+			
 		Customer.updateCustomerHours(mail, name, int(hoursToAdd))
 
 		self.response.write(json.dumps({"status": "OK"}))
@@ -51,6 +65,11 @@ class resetCustomerhours(webapp2.RequestHandler):
 		if not user:
 			self.error(403)
 			self.response.write('No user - access denied')
+			return
+		customer=Customer.query(Customer.name==name, Customer.user==user.mail).get()
+		if not customer:
+			self.error(402)
+			self.response.write('no customer')
 			return
 		Customer.resetCustomerHours(mail, name)
 

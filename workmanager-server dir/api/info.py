@@ -29,8 +29,11 @@ class getCustomerInfo(webapp2.RequestHandler):
 		name=self.request.get('name')
 		
 		user= User.query(User.mail == mail).get()
-		
-		customer=Customer.query(customer.name==name, customer.user==user.mail).get()
+		if not user:
+			self.error(403)
+			self.response.write(' user Error')
+			return
+		customer=Customer.query(Customer.name==name, Customer.user==mail).get()
 		if not customer:
 			self.error(403)
 			self.response.write('no customer')
@@ -52,6 +55,10 @@ class getUserCustomers(webapp2.RequestHandler):
 		mail=self.request.get('mail')
 		
 		user= User.query(User.mail == mail).get()
+		if not user:
+			self.error(403)
+			self.response.write(' user Error')
+			return
 		customers=Customer.getAllCustomersPerUser(user.mail)
 		
 		
@@ -59,9 +66,27 @@ class getUserCustomers(webapp2.RequestHandler):
 		template_params['status']="OK"
 		template_params['customers']=customers
 		self.response.write(json.dumps(template_params))
+		
+class getUserCustomersAndHours(webapp2.RequestHandler):
+	def get(self):
+		template_params={}
+		mail=self.request.get('mail')
+		
+		user= User.query(User.mail == mail).get()
+		if not user:
+			self.error(403)
+			self.response.write(' user Error')
+			return
+		hours=Customer.getAllCustomersAndHoursPerUser(user.mail)
+		
+		
+		template_params['status']="OK"
+		template_params['customersandhours']=hours
+		self.response.write(json.dumps(template_params))
 
 app = webapp2.WSGIApplication([
 	('/api/getuserinfo',getUserInfo),
 	('/api/getcustomerinfo',getCustomerInfo),
-	('/api/getusercustomers', getUserCustomers)
+	('/api/getusercustomers', getUserCustomers),
+	('/api/getusercustomersandhours', getUserCustomersAndHours)
 ], debug=True)

@@ -27,6 +27,9 @@ handlers:
 - url: /api/getusercustomers
   script: api.info.app
 
+- url: /api/getusercustomersandhours
+  script: api.info.app
+
 - url: /api/addcustomer
   script: api.addCustomer.app
 
@@ -38,6 +41,12 @@ handlers:
 
 - url: /api/resetcustomerhours
   script: api.updateCustomer.app
+
+- url: /api/updateusermanagerpricing
+  script: api.updateUser.app
+
+- url: /api/updateuserworkerpricing
+  script: api.updateUser.app
 
 - url: .*
   script: main.app

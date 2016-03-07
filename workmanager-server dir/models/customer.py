@@ -29,6 +29,15 @@ class Customer(ndb.Model):
 		for customer in q:
 			customers_arr.append({"name": customer.name})
 		return customers_arr
+		
+	@staticmethod
+	def getAllCustomersAndHoursPerUser(user):
+		q = Customer.query(Customer.user == user)
+		customers_arr = []
+		for customer in q:
+			customers_arr.append({"name": customer.name,
+				"hours": customer.hours})
+		return customers_arr
 	
 	@staticmethod
 	def remove(user, name):

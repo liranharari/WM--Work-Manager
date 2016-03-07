@@ -46,4 +46,42 @@ class User(ndb.Model):
 		if user:
 			return user
 		return None
+
+	@staticmethod
+	def remove(mail):
+		user=User.query(User.mail == mail).get()			
+		if user is not None:
+			user.key.delete();
+		return
+		
+	@staticmethod
+	def addUser(mail, password, code, managerPricing, workerPricing):
+		user=User()
+		user.mail=mail
+		user.password=password
+		user.code=code
+		user.managerPricing=managerPricing
+		user.workerPricing=workerPricing
+		user.put()
+		return
+		
+	@staticmethod	
+	def updateManagerPricing(mail, managerPricing):
+		user=User.query(User.mail == mail).get()	
+		password=user.password
+		code=user.code
+		workerPricing= user.workerPricing
+		User.remove(mail)
+		User.addUser(mail, password, code, managerPricing, workerPricing)
+		return
+		
+	@staticmethod	
+	def updateWorkerPricing(mail, workerPricing):
+		user=User.query(User.mail == mail).get()	
+		password=user.password
+		code=user.code
+		managerPricing= user.managerPricing
+		User.remove(mail)
+		User.addUser(mail, password, code, managerPricing, workerPricing)
+		return
 		
