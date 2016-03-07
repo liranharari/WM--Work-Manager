@@ -31,9 +31,15 @@ class Customer(ndb.Model):
 	
 	@staticmethod
 	def remove(user, name):
-		customer=Customer.getCustomer(user, name)		
+		customer=Customer.query(Customer.user == user , Customer.name == name).get()	
 		if customer is not None:
 			customer.key.delete();
+		return
+	
+	@staticmethod	
+	def updateCustomer(user, name, newname, address, phone, email, field1, field2, field3, field4, field5, field6):
+		Customer.remove(user, name)
+		Customer.addcustomerfromuser(user, newname, address, phone, email, field1, field2, field3, field4, field5, field6)
 		return
 		
 	@staticmethod
@@ -41,7 +47,7 @@ class Customer(ndb.Model):
 		customer=Customer()
 		customer.name=name
 		customer.address=address
-		customer.user=user.key
+		customer.user=user
 		customer.phone=phone
 		customer.email=email
 		customer.field1=field1
