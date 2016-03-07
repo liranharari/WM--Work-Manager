@@ -33,6 +33,12 @@ handlers:
 - url: /api/updatecustomer
   script: api.updateCustomer.app
 
+- url: /api/addcustomerhours
+  script: api.updateCustomer.app
+
+- url: /api/resetcustomerhours
+  script: api.updateCustomer.app
+
 - url: .*
   script: main.app
   
