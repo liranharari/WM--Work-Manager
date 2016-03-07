@@ -3,7 +3,7 @@ from google.appengine.ext.webapp import template
 import webapp2
 import json
 from models.user import User
-from models.costumer import Costumer
+from models.customer import Customer
 
 
 class getUserInfo(webapp2.RequestHandler):
@@ -22,7 +22,7 @@ class getUserInfo(webapp2.RequestHandler):
 		template_params['workerPricing']=user.workerPricing
 		self.response.write(json.dumps(template_params))
 
-class getCostumerInfo(webapp2.RequestHandler):
+class getCustomerInfo(webapp2.RequestHandler):
 	def get(self):
   		template_params={}
 		mail=self.request.get('mail')
@@ -30,38 +30,38 @@ class getCostumerInfo(webapp2.RequestHandler):
 		
 		user= User.query(User.mail == mail).get()
 		
-		costumer=Costumer.query(Costumer.name==name, Costumer.user==user.mail).get()
-		if not costumer:
+		customer=Customer.query(customer.name==name, customer.user==user.mail).get()
+		if not customer:
 			self.error(403)
-			self.response.write('no costumer')
+			self.response.write('no customer')
 			return
 		
-		template_params['address']=costumer.address
-		template_params['phone']=costumer.phone
-		template_params['email']=costumer.email
-		template_params['field1']=costumer.field1
-		template_params['field2']=costumer.field2
-		template_params['field3']=costumer.field3
-		template_params['field4']=costumer.field4
-		template_params['field5']=costumer.field5
+		template_params['address']=customer.address
+		template_params['phone']=customer.phone
+		template_params['email']=customer.email
+		template_params['field1']=customer.field1
+		template_params['field2']=customer.field2
+		template_params['field3']=customer.field3
+		template_params['field4']=customer.field4
+		template_params['field5']=customer.field5
 		self.response.write(json.dumps(template_params))
 
-class getUserCostumers(webapp2.RequestHandler):
+class getUserCustomers(webapp2.RequestHandler):
 	def get(self):
 		template_params={}
-		code=self.request.get('code')
+		mail=self.request.get('mail')
 		
-		user= User.query(User.code == code).get()
-		if not user:
-			self.error(403)
-			self.response.write('Wrong code')
-			return
+		user= User.query(User.mail == mail).get()
+		customers=Customer.getAllCustomersPerUser(user.mail)
+		
+		
+		
 		template_params['status']="OK"
-		template_params['user']=user.mail
-		template_params['type']="worker"
+		template_params['customers']=customers
 		self.response.write(json.dumps(template_params))
 
 app = webapp2.WSGIApplication([
 	('/api/getuserinfo',getUserInfo),
-	('/api/getcostumerinfo',getCostumerInfo)
+	('/api/getcustomerinfo',getCustomerInfo),
+	('/api/getusercustomers', getUserCustomers)
 ], debug=True)

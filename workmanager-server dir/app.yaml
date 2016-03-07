@@ -21,11 +21,14 @@ handlers:
 - url: /api/getuserinfo
   script: api.info.app
 
-- url: /api/getcostumerinfo
+- url: /api/getcustomerinfo
   script: api.info.app
 
-- url: /api/addcostumer
-  script: api.addCostumer.app
+- url: /api/getusercustomers
+  script: api.info.app
+
+- url: /api/addcustomer
+  script: api.addCustomer.app
 
 - url: .*
   script: main.app
