@@ -2,7 +2,7 @@
 from google.appengine.ext import ndb
 from user import User
 class Costumer(ndb.Model):
-	user = ndb.KeyProperty(kind=User)
+	user = ndb.StringProperty() 
 	name = ndb.StringProperty() 
 	address = ndb.StringProperty()
 	phone = ndb.StringProperty()
