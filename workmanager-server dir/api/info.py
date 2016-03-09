@@ -4,6 +4,7 @@ import webapp2
 import json
 from models.user import User
 from models.customer import Customer
+from models.field import Field
 
 
 class getUserInfo(webapp2.RequestHandler):
@@ -84,9 +85,27 @@ class getUserCustomersAndHours(webapp2.RequestHandler):
 		template_params['customersandhours']=hours
 		self.response.write(json.dumps(template_params))
 
+class getUserFields(webapp2.RequestHandler):
+	def get(self):
+		template_params={}
+		mail=self.request.get('mail')
+		
+		user= User.query(User.mail == mail).get()
+		if not user:
+			self.error(403)
+			self.response.write(' user Error')
+			return
+		fields=Field.getAllFieldsPerUser(user.mail)
+		
+		
+		template_params['status']="OK"
+		template_params['fields']=fields
+		self.response.write(json.dumps(template_params))
+
 app = webapp2.WSGIApplication([
 	('/api/getuserinfo',getUserInfo),
 	('/api/getcustomerinfo',getCustomerInfo),
 	('/api/getusercustomers', getUserCustomers),
-	('/api/getusercustomersandhours', getUserCustomersAndHours)
+	('/api/getusercustomersandhours', getUserCustomersAndHours),
+	('/api/getuserfields', getUserFields)
 ], debug=True)
