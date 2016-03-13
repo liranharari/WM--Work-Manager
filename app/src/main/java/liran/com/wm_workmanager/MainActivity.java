@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher_wm_logo_white);
+      //  getSupportActionBar().setIcon(R.mipmap.ic_launcher_wm_logo_white);
 
 
         final Intent workAc = new Intent(this, WorkActivity.class);

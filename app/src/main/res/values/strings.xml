@@ -34,6 +34,15 @@
     <string name="signIn">הרשם!</string>
     <string name="signin">Sign In</string>
     <string name="code">קוד</string>
+    <string name="managerPricing">תעריף מנהל</string>
+    <string name="workerPricing">תעריף עובד</string>
+    <string name="field1">שדה 1:</string>
+    <string name="field2">שדה 2:</string>
+    <string name="field3">שדה 3:</string>
+    <string name="field4">שדה 4:</string>
+    <string name="field5">שדה 5:</string>
+    <string name="field6">שדה 6:</string>
+
 
 
 </resources>
