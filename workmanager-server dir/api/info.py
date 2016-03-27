@@ -102,10 +102,25 @@ class getUserFields(webapp2.RequestHandler):
 		template_params['fields']=fields
 		self.response.write(json.dumps(template_params))
 
+class getCodes(webapp2.RequestHandler):
+	def get(self):
+		template_params={}
+		code=self.request.get('code')
+		
+		user= User.query(User.code == code).get()
+		if user:
+			self.error(403)
+			self.response.write('taken code')
+			return
+		
+		template_params['status']="OK"
+		self.response.write(json.dumps(template_params))
+
 app = webapp2.WSGIApplication([
 	('/api/getuserinfo',getUserInfo),
 	('/api/getcustomerinfo',getCustomerInfo),
 	('/api/getusercustomers', getUserCustomers),
 	('/api/getusercustomersandhours', getUserCustomersAndHours),
-	('/api/getuserfields', getUserFields)
+	('/api/getuserfields', getUserFields),
+	('/api/getcodes', getCodes)
 ], debug=True)

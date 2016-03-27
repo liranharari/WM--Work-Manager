@@ -21,9 +21,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.util.Locale;
 import java.util.Random;
-import android.content.DialogInterface;
 
 public class SignInActivity extends Activity {
 
@@ -31,7 +29,8 @@ public class SignInActivity extends Activity {
     private Button signIn;
     private String code;
     private EditText editWorkerPricing, editManagerPricing, editField1, editField2, editField3, editField4, editField5, editField6;
-    private final String URL = "http://workmanager-2016.appspot.com/api/signup?";
+    private final String SIGNUP_URL = "http://workmanager-2016.appspot.com/api/signup?";
+    private final String GETCODES_URL = "http://workmanager-2016.appspot.com/api/getcodes?";
     private Context context;
     private Intent workAc;
 
@@ -62,6 +61,7 @@ public class SignInActivity extends Activity {
             @Override
             public void onClick(View v) {
                 code=generateRandomCode();
+
                /* Toast.makeText(getApplicationContext(), "new user "+ editMail.getText().toString()+
                                 "added succesfully"+code, Toast.LENGTH_LONG).show();
 */
@@ -84,7 +84,7 @@ public class SignInActivity extends Activity {
                                       String Field3, String Field4, String Field5, String Field6){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = URL +"mail="+mail+"&"+
+        String url = SIGNUP_URL +"mail="+mail+"&"+
                 "password="+password+
                 "&code="+code+
                 "&managerPricing="+ManagerPricing+
@@ -157,4 +157,7 @@ public class SignInActivity extends Activity {
         String saltStr = salt.toString();
         return saltStr;
     }
+
+
+
 }

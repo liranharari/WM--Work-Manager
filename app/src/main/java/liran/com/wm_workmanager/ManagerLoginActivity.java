@@ -1,5 +1,6 @@
 package liran.com.wm_workmanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class ManagerLoginActivity extends AppCompatActivity {
     private EditText editUsername;
     private EditText editPassword;
     private Button btn_login;
+    private final String LOGIN_URL = "http://workmanager-2016.appspot.com/api/loginManager?";
+    private Intent workAc;
+    private Context context;
 
 
     @Override
@@ -31,8 +35,8 @@ public class ManagerLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_login);
 
-        final Intent workAc = new Intent(this, WorkActivity.class);
-
+        workAc = new Intent(this, WorkActivity.class);
+        context=this;
 
         editUsername= (EditText) findViewById(R.id.editUsernmae);
         editPassword= (EditText) findViewById(R.id.editPassword);
@@ -69,17 +73,7 @@ public class ManagerLoginActivity extends AppCompatActivity {
     private void VollyRequestToLogIn(final String mail, String password){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = URL +"mail="+mail+"&"+
-                "password="+password+
-                "&code="+code+
-                "&managerPricing="+ManagerPricing+
-                "&workerPricing="+WorkerPricing+
-                "&field1="+Field1+
-                "&field2="+Field2+
-                "&field3="+Field3+
-                "&field4="+Field4+
-                "&field5="+Field5+
-                "&field6="+Field6;
+        final String url =LOGIN_URL +"mail="+mail+"&"+"password="+password;
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
@@ -87,9 +81,9 @@ public class ManagerLoginActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.i("test", "good");
-                    Toast.makeText(getApplicationContext(), response.getString("status"), Toast.LENGTH_LONG).show();
                     WorkActivity.is_login=WorkActivity.MANAGER_LOGIN;
-                    showCodeAlertDialog(mail);
+                    workAc.putExtra("user", mail);
+                    startActivity(workAc);
 
                 } catch (Exception e) {
                     Log.i("test", "errorr");
@@ -102,7 +96,7 @@ public class ManagerLoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Utils.cancelProgressDialog();
-                Toast.makeText(context, "Failed sign up", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Failed sign in", Toast.LENGTH_SHORT).show();
 
             }
         });

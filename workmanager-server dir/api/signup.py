@@ -8,6 +8,7 @@ from models.field import Field
 
 class signUp(webapp2.RequestHandler):
 	def get(self):
+		template_params={}
 		mail=self.request.get('mail')
 		password=self.request.get('password')
 		code=self.request.get('code')
@@ -34,8 +35,10 @@ class signUp(webapp2.RequestHandler):
 		user.workerPricing=int(workerPricing)
 		user.put()
 		Field.addfieldstouser(mail, field1, field2, field3, field4, field5, field6)
-		self.response.write(json.dumps({"status": "OK"}))
-
+		template_params['status']="OK"
+		template_params['user']=user.mail
+		template_params['type']="manager"
+		self.response.write(json.dumps(template_params))
 
 app = webapp2.WSGIApplication([
 	('/api/signup',signUp)

@@ -33,6 +33,9 @@ handlers:
 - url: /api/getuserfields
   script: api.info.app
 
+- url: /api/getcodes
+  script: api.info.app
+
 - url: /api/addcustomer
   script: api.addCustomer.app
 

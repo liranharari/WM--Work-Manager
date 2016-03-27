@@ -85,3 +85,5 @@ class User(ndb.Model):
 		User.addUser(mail, password, code, managerPricing, workerPricing)
 		return
 		
+		
+		
