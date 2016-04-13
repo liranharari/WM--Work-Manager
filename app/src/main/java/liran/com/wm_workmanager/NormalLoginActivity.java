@@ -26,7 +26,7 @@ public class NormalLoginActivity extends Activity {
     private final String LOGIN_VIA_CODE_URL = "http://workmanager-2016.appspot.com/api/loginCode?";
     private Intent workAc;
     private Context context;
-
+    private Utils loginUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class NormalLoginActivity extends Activity {
         btnNormalLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.showProgressDialog(v.getContext(), "מתחבר...");
+                loginUtils.showProgressDialog(v.getContext(), "מתחבר...");
                 VollyRequestToLogInViaCode(editCode.getText().toString());
 
             }
@@ -71,7 +71,6 @@ public class NormalLoginActivity extends Activity {
             public void onResponse(JSONObject response) {
                 try {
                     WorkActivity.is_login=WorkActivity.NORMAL_LOGIN;
-                    Toast.makeText(context, response.getString("user"), Toast.LENGTH_SHORT).show();
                     workAc.putExtra("user", response.getString("user"));
                     startActivity(workAc);
 
@@ -80,12 +79,12 @@ public class NormalLoginActivity extends Activity {
                     e.printStackTrace();
 
                 }
-                Utils.cancelProgressDialog();
+                loginUtils.cancelProgressDialog();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Utils.cancelProgressDialog();
+                loginUtils.cancelProgressDialog();
                 Toast.makeText(context, "Failed sign in", Toast.LENGTH_SHORT).show();
                 editCode.setText("");
 

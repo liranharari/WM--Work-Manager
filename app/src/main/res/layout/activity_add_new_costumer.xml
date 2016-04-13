@@ -101,13 +101,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/caseNum"
-                    android:id="@+id/txtCaseNum" />
+                    android:id="@+id/txtfield1" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editNewCaseNum" />
+                    android:id="@+id/editfield1" />
 
 
             </LinearLayout>
@@ -120,13 +119,30 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/caseNumDeductions"
-                    android:id="@+id/txtCaseNumDeductions" />
+                    android:id="@+id/txtfield2" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editNewCaseNumDeductions" />
+                    android:id="@+id/editfield2" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtfield3" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editfield3" />
             </LinearLayout>
 
 
@@ -140,13 +156,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/incomeTax"
-                    android:id="@+id/txtIncomeTax" />
+                    android:id="@+id/txtfield4" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editNewIncomeTax" />
+                    android:id="@+id/editfield4" />
             </LinearLayout>
 
             <LinearLayout
@@ -157,13 +172,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/insurance"
-                    android:id="@+id/txtInsurance" />
+                    android:id="@+id/txtfield5" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editNewInsurance" />
+                    android:id="@+id/editfield5" />
             </LinearLayout>
 
 
@@ -176,13 +190,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/VAT"
-                    android:id="@+id/txtVAT" />
+                    android:id="@+id/txtfield6" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editNewVAT" />
+                    android:id="@+id/editfield6" />
             </LinearLayout>
 
             <Button

@@ -2,6 +2,7 @@ package liran.com.wm_workmanager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 
 public class WorkActivity extends AppCompatActivity {
     public final static int NORMAL_LOGIN=2, MANAGER_LOGIN=1, NOT_LOGIN=0;
@@ -37,9 +40,16 @@ public class WorkActivity extends AppCompatActivity {
     private Button btn_add_costumer;
     private Button btn_menu;
     private ListView customersList; //the list of the customers
-    private ArrayList<String> customers= new ArrayList<String>();
+    private ArrayList<String> customers;
     Context context;
+    private Utils customersListUtils;
 
+    final Intent loginAc = new Intent(this, MainActivity.class);
+
+
+    //preferences
+    private SharedPreferences sharedPrefs;
+    private SharedPreferences.Editor editor;
 
     //  private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
   //  private Button swt1, swt2, swt3, swt4, swt5, swt6, swt7, swt8, swt9, swt10, swt11, swt12;
@@ -50,22 +60,37 @@ public class WorkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_work);
 
         context=this;
-        user=getIntent().getStringExtra("user");
-        Toast.makeText(getApplicationContext(), "userh is: "+user, Toast.LENGTH_LONG).show();
+        sharedPrefs = Utils.getSharedPreferences(this);
+        editor = Utils.getSharedPreferencesEditor(this);
+        customers= new ArrayList<String>();
 
+        if(getIntent().getStringExtra("user")==null)
+            user = sharedPrefs.getString(Utils.userName, "");
+        else {
+            user = getIntent().getStringExtra("user");
+            editor.putString(Utils.userName, user);
+            editor.apply();
+        }
 
-        Intent loginAc = new Intent(this, MainActivity.class);
+        Toast.makeText(context, "user:::"+ user, Toast.LENGTH_SHORT).show();
+
         final Intent menuAc = new Intent(this, MenuActivity.class);
         final Intent AddNewCostumerAc = new Intent(this, AddNewCostumerActivity.class);
+
 
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
         btn_menu=(Button) findViewById(R.id.btnMenu);
         customersList= (ListView) findViewById(R.id.listViewCustomers);
 
-        Utils.showProgressDialog(this, "מעלה לקוחות...");
-        CustomerListForUser(user);
+       // customersListUtils.showProgressDialog(this, "מעלה לקוחות...");
+       // CustomerListForUser(user);
 
-        customersList.setAdapter(new MyListAdapter(this, R.layout.single_customer_row, customers));
+        /*try { //wait for the answer
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+       // customersList.setAdapter(new MyListAdapter(this, R.layout.single_customer_row, customers));
 
 
         if(is_login!= MANAGER_LOGIN)
@@ -85,12 +110,32 @@ public class WorkActivity extends AppCompatActivity {
         btn_add_costumer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AddNewCostumerAc.putExtra("user", user);
                 startActivity(AddNewCostumerAc);
             }
         });
 
 
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        user = sharedPrefs.getString(Utils.userName, "");
+        Toast.makeText(context, "user resumed: "+ user, Toast.LENGTH_SHORT).show();
+        customersListUtils.showProgressDialog(this, "מעלה לקוחות...");
+        CustomerListForUser(user);
+
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        customersList.setAdapter(new MyListAdapter(this, R.layout.single_customer_row, customers));
 
     }
 
@@ -104,33 +149,39 @@ public class WorkActivity extends AppCompatActivity {
 
             public void onResponse(JSONObject response) {
                 try {
-                   for(int i=0; i<response.getJSONArray("customers").length(); i++)
+                    customers.clear();
+                    for(int i=0; i<response.getJSONArray("customers").length(); i++)
                         customers.add(response.getJSONArray("customers").getJSONObject(i).getString("name"));
+
                 } catch (Exception e) {
-                    Log.i("test", "errorr");
                     e.printStackTrace();
 
                 }
-                Utils.cancelProgressDialog();
+
+                customersListUtils.cancelProgressDialog();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Utils.cancelProgressDialog();
+                customersListUtils.cancelProgressDialog();
                 Toast.makeText(context, "error uploading customers", Toast.LENGTH_SHORT).show();
-                onBackPressed();
+                WorkActivity.is_login=NOT_LOGIN;
+                startActivity(new Intent(context, MainActivity.class));
 
             }
         });
         queue.add(request);
     }
 
-
     @Override
-    public void onBackPressed()
-    {
-        finishAffinity(); ////////close all
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(context, "on stop", Toast.LENGTH_SHORT).show();
+
     }
+
+
+
 
     /*public void costumerButtonClicked(View view) {
         Intent costumerInfoAc= new Intent(this, CostumerInfoActivity.class);
@@ -138,7 +189,6 @@ public class WorkActivity extends AppCompatActivity {
         if (view.getId() == R.id.btn1) {
             startActivity(costumerInfoAc);
     */
-
 
 
 
@@ -167,6 +217,7 @@ public class WorkActivity extends AppCompatActivity {
                     }
                 });
                 viewHolder.customerName= (Button) convertView.findViewById(R.id.list_item_btn);
+                viewHolder.customerName.setText(getItem(position));
                 viewHolder.customerName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
