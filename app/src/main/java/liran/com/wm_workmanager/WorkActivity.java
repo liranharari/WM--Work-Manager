@@ -45,7 +45,7 @@ public class WorkActivity extends AppCompatActivity {
     private Utils customersListUtils;
 
     final Intent loginAc = new Intent(this, MainActivity.class);
-
+    private Intent costumerInfoAc;
 
     //preferences
     private SharedPreferences sharedPrefs;
@@ -76,6 +76,7 @@ public class WorkActivity extends AppCompatActivity {
 
         final Intent menuAc = new Intent(this, MenuActivity.class);
         final Intent AddNewCostumerAc = new Intent(this, AddNewCostumerActivity.class);
+        costumerInfoAc= new Intent(this, CostumerInfoActivity.class);
 
 
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
@@ -176,7 +177,6 @@ public class WorkActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(context, "on stop", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -184,7 +184,7 @@ public class WorkActivity extends AppCompatActivity {
 
 
     /*public void costumerButtonClicked(View view) {
-        Intent costumerInfoAc= new Intent(this, CostumerInfoActivity.class);
+
 
         if (view.getId() == R.id.btn1) {
             startActivity(costumerInfoAc);
@@ -207,7 +207,7 @@ public class WorkActivity extends AppCompatActivity {
             {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView= inflater.inflate(layout, parent, false);
-                ViewHolder viewHolder= new ViewHolder();
+                final ViewHolder viewHolder= new ViewHolder();
                 viewHolder.timeSwitch= (Switch) convertView.findViewById(R.id.list_item_switch);
                 viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -221,7 +221,9 @@ public class WorkActivity extends AppCompatActivity {
                 viewHolder.customerName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "customer name pressed "+position, Toast.LENGTH_LONG).show();
+                        costumerInfoAc.putExtra("user", user);
+                        costumerInfoAc.putExtra("customer", viewHolder.customerName.getText().toString());
+                        startActivity(costumerInfoAc);
                     }
                 });
                 convertView.setTag(viewHolder);
