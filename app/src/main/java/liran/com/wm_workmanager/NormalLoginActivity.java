@@ -63,7 +63,9 @@ public class NormalLoginActivity extends Activity {
     private void VollyRequestToLogInViaCode(final String code){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url =LOGIN_VIA_CODE_URL +"code="+code;
+        String url =LOGIN_VIA_CODE_URL +"code="+code;
+
+        url = url.replaceAll(" ", "%20");
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override

@@ -73,7 +73,9 @@ public class ManagerLoginActivity extends AppCompatActivity {
     private void VollyRequestToLogIn(final String mail, String password){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url =LOGIN_URL +"mail="+mail+"&"+"password="+password;
+        String url =LOGIN_URL +"mail="+mail+"&"+"password="+password;
+
+        url = url.replaceAll(" ", "%20");
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override

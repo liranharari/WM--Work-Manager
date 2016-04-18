@@ -138,7 +138,7 @@ public class AddNewCostumerActivity extends Activity {
     {
         addcustomerUtils.showProgressDialog(this, "Loading..");
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url =ADD_CUSTOMER_URL +"mail="+user+
+        String url =ADD_CUSTOMER_URL +"mail="+user+
                 "&name="+editName.getText().toString()+
                 "&address="+editAdress.getText().toString()+
                 "&phone="+editPhone.getText().toString()+
@@ -149,6 +149,8 @@ public class AddNewCostumerActivity extends Activity {
                 "&field4="+editfield4.getText().toString()+
                 "&field5="+editfield5.getText().toString()+
                 "&field6="+editfield6.getText().toString();
+
+        url = url.replaceAll(" ", "%20");
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override

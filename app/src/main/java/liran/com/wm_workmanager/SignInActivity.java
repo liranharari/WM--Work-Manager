@@ -96,6 +96,7 @@ public class SignInActivity extends Activity {
                 "&field5="+Field5+
                 "&field6="+Field6;
 
+        url = url.replaceAll(" ", "%20");
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
 

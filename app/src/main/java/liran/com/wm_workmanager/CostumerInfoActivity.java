@@ -32,6 +32,7 @@ public class CostumerInfoActivity extends AppCompatActivity {
     private final String GET_CUSTOMER_FIELDS_URL="http://workmanager-2016.appspot.com/api/getuserfields?";
     private String name, address, phone, mail, f1, f2, f3, f4, f5, f6;
     Context context;
+    private Intent editAc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class CostumerInfoActivity extends AppCompatActivity {
 
         context=this;
 
-        final Intent editAc = new Intent(this, EditCostumerActivity.class);
+        editAc = new Intent(this, EditCostumerActivity.class);
 
         if(getIntent().getStringExtra("user")==null || getIntent().getStringExtra("customer")==null )
             Toast.makeText(getApplicationContext(), "errrotorrr", Toast.LENGTH_LONG).show();
@@ -53,27 +54,39 @@ public class CostumerInfoActivity extends AppCompatActivity {
         txtcostumerInfo= (TextView) findViewById(R.id.textInfo);
         btnEditCostumer= (Button) findViewById(R.id.btn_edit_costumer);
 
-        getfields();
+       // getfields();
 
-        getInfo();
+        //getInfo();
 
 
 
         btnEditCostumer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                editAc.putExtra("user", user);
+                editAc.putExtra("customer", customer);
                 startActivity(editAc);
             }
         });
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getfields();
+
+        getInfo();
+    }
+
     private void getInfo()
     {
         customerInfoUtils.showProgressDialog(this, "....info");
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url =GET_CUSTOMER_INFO_URL +"mail="+user+"&name="+customer;
+        String url =GET_CUSTOMER_INFO_URL +"mail="+user+"&name="+customer;
+
+        url = url.replaceAll(" ", "%20");
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
@@ -84,8 +97,7 @@ public class CostumerInfoActivity extends AppCompatActivity {
                     address="כתובת: "  +  response.getString("address");
                     phone= "טלפון: " + response.getString("phone");
                     mail= "מייל: " + response.getString("email");
-                    if(!response.getString("field1").equals(""))
-                        f1= f1+ response.getString("field1");
+                    f1= f1+ response.getString("field1");
                     f2= f2+ response.getString("field2");
                     f3= f3+ response.getString("field3");
                     f4= f4+ response.getString("field4");
@@ -95,12 +107,22 @@ public class CostumerInfoActivity extends AppCompatActivity {
                     if(f1==null)f1="";
                     if(f2==null)f2="";
                     if(f3==null)f3="";
-                    if(f4==null)f4="";
-                    if(f5==null)f5="";
-                    if(f6==null)f6="";
+                    if (f4 == null) f4 = "";
+                    if (f5 == null) f5 = "";
+                    if (f6 == null) f6 = "";
 
                     txtcostumerInfo.setText(name+ "\n" + address +"\n" + phone+"\n" +
                             mail+"\n" +f1+"\n" +f2+"\n" +f3+"\n" +f4+"\n" +f5+"\n" +f6);
+
+                    editAc.putExtra("address", response.getString("address"));
+                    editAc.putExtra("phone",  response.getString("phone"));
+                    editAc.putExtra("mail", response.getString("email"));
+                    editAc.putExtra("f1", response.getString("field1"));
+                    editAc.putExtra("f2", response.getString("field2"));
+                    editAc.putExtra("f3", response.getString("field3"));
+                    editAc.putExtra("f4", response.getString("field4"));
+                    editAc.putExtra("f5", response.getString("field5"));
+                    editAc.putExtra("f6", response.getString("field6"));
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,7 +145,9 @@ public class CostumerInfoActivity extends AppCompatActivity {
     private void getfields()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url =GET_CUSTOMER_FIELDS_URL +"mail="+user;
+        String url =GET_CUSTOMER_FIELDS_URL +"mail="+user;
+
+        url = url.replaceAll(" ", "%20");
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
@@ -137,6 +161,13 @@ public class CostumerInfoActivity extends AppCompatActivity {
                     f4= response.getJSONArray("fields").getJSONObject(0).getString("field4")+": ";
                     f5= response.getJSONArray("fields").getJSONObject(0).getString("field5")+": ";
                     f6= response.getJSONArray("fields").getJSONObject(0).getString("field6")+": ";
+
+                    editAc.putExtra("f1Name", response.getJSONArray("fields").getJSONObject(0).getString("field1"));
+                    editAc.putExtra("f2Name", response.getJSONArray("fields").getJSONObject(0).getString("field2"));
+                    editAc.putExtra("f3Name", response.getJSONArray("fields").getJSONObject(0).getString("field3"));
+                    editAc.putExtra("f4Name", response.getJSONArray("fields").getJSONObject(0).getString("field4"));
+                    editAc.putExtra("f5Name", response.getJSONArray("fields").getJSONObject(0).getString("field5"));
+                    editAc.putExtra("f6Name", response.getJSONArray("fields").getJSONObject(0).getString("field6"));
 
 
                 } catch (Exception e) {

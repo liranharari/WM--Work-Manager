@@ -51,8 +51,6 @@ public class WorkActivity extends AppCompatActivity {
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor editor;
 
-    //  private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
-  //  private Button swt1, swt2, swt3, swt4, swt5, swt6, swt7, swt8, swt9, swt10, swt11, swt12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +141,9 @@ public class WorkActivity extends AppCompatActivity {
     private void CustomerListForUser(String user)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url =GET_CUSTOMERS_URL +"mail="+user;
+        String url =GET_CUSTOMERS_URL +"mail="+user;
+
+        url = url.replaceAll(" ", "%20");
 
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
