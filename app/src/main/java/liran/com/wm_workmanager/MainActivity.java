@@ -1,8 +1,10 @@
 package liran.com.wm_workmanager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_login_manger;
     private Button btn_login_normal;
     private Button btn_signIn;
+
+    private SharedPreferences sharedPrefs;
+
 
 
     @Override
@@ -31,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
         btn_login_normal=(Button) findViewById(R.id.btn_login_normal);
         btn_signIn=(Button) findViewById(R.id.btn_sign_in);
 
-        if(WorkActivity.is_login!=WorkActivity.NOT_LOGIN)
+        //if(WorkActivity.is_login!=WorkActivity.NOT_LOGIN)
+      //  if(WorkActivity.sharedPrefs.getString(Utils.userName, "").toString()==null)
+        sharedPrefs=this.getSharedPreferences("userSharedPrefs", 0);
+        Log.i("sp7", ">"+sharedPrefs.getInt(Utils.isLogin, 0));
+        if(sharedPrefs.getInt(Utils.isLogin, 0)!=WorkActivity.NOT_LOGIN)
         {
             startActivity(workAc);
         }

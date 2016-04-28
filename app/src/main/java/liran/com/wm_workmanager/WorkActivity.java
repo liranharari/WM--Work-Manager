@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,13 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.lang.Thread.sleep;
 
@@ -35,7 +41,6 @@ public class WorkActivity extends AppCompatActivity {
     public final static int NORMAL_LOGIN=2, MANAGER_LOGIN=1, NOT_LOGIN=0;
     private final String GET_CUSTOMERS_URL = "http://workmanager-2016.appspot.com/api/getusercustomers?";
 
-    public static int is_login=NOT_LOGIN;
     public String user;
     private Button btn_add_costumer;
     private Button btn_menu;
@@ -67,10 +72,11 @@ public class WorkActivity extends AppCompatActivity {
         else {
             user = getIntent().getStringExtra("user");
             editor.putString(Utils.userName, user);
+           // editor.putInt(Utils.isLogin, );
             editor.apply();
         }
 
-        Toast.makeText(context, "user:::"+ user, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "user:::"+ user, Toast.LENGTH_SHORT).show();
 
         final Intent menuAc = new Intent(this, MenuActivity.class);
         final Intent AddNewCostumerAc = new Intent(this, AddNewCostumerActivity.class);
@@ -92,7 +98,7 @@ public class WorkActivity extends AppCompatActivity {
        // customersList.setAdapter(new MyListAdapter(this, R.layout.single_customer_row, customers));
 
 
-        if(is_login!= MANAGER_LOGIN)
+        if(sharedPrefs.getInt(Utils.isLogin, 0)!= MANAGER_LOGIN)
         {
             btn_add_costumer.setVisibility(View.GONE);
             btn_menu.setVisibility(View.GONE);
@@ -124,7 +130,7 @@ public class WorkActivity extends AppCompatActivity {
         super.onResume();
 
         user = sharedPrefs.getString(Utils.userName, "");
-        Toast.makeText(context, "user resumed: "+ user, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "user resumed: "+ user, Toast.LENGTH_SHORT).show();
         customersListUtils.showProgressDialog(this, "מעלה לקוחות...");
         CustomerListForUser(user);
 
@@ -166,7 +172,8 @@ public class WorkActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 customersListUtils.cancelProgressDialog();
                 Toast.makeText(context, "error uploading customers", Toast.LENGTH_SHORT).show();
-                WorkActivity.is_login=NOT_LOGIN;
+                sharedPrefs.edit().putInt(Utils.isLogin, WorkActivity.NOT_LOGIN);
+                sharedPrefs.edit().apply();
                 startActivity(new Intent(context, MainActivity.class));
 
             }
@@ -211,7 +218,35 @@ public class WorkActivity extends AppCompatActivity {
                 viewHolder.timeSwitch= (Switch) convertView.findViewById(R.id.list_item_switch);
                 viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        Toast.makeText(getApplicationContext(), "time switch is: "+isChecked, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "time switch is: "+isChecked, Toast.LENGTH_LONG).show();
+
+                        if(isChecked==true)//time not running- start time!
+                        {
+                            if(sharedPrefs.contains(viewHolder.customerName.getText().toString()))
+                                return;
+                            long startTime = System.currentTimeMillis();
+
+                            SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
+                            editor.putLong(viewHolder.customerName.getText().toString(), startTime);
+                            editor.commit();
+                        }
+                        if(isChecked==false)//time running - stop time!
+                        {
+                            /*if(sharedPrefs.contains(viewHolder.customerName.getText().toString()))
+                                return;*/
+                            long time= System.currentTimeMillis() - sharedPrefs.getLong(viewHolder.customerName.getText().toString(), 0);
+                            Toast.makeText(getApplicationContext(), "time is: "+time*0.001, Toast.LENGTH_LONG).show();
+                            editor.remove(viewHolder.customerName.getText().toString());
+                            editor.commit();
+                           /* getTime(viewHolder.timeSwitch.getText().toString(), )
+                            String[] time = viewHolder.timeSwitch.getText().toString().split(":");
+                            int hour =Integer.parseInt(time[0]);
+                            int minute =Integer.parseInt( time[1]);
+                            long starttime=Long.valueOf(viewHolder.timeSwitch.getText().toString());
+                            long time=System.currentTimeMillis()-starttime;
+                            Toast.makeText(getApplicationContext(), "time : "+(int) ((time / (1000*60)) % 60), Toast.LENGTH_LONG).show();
+*/
+                        }
                         // do something, the isChecked will be
                         // true if the switch is in the On position
                     }
@@ -226,11 +261,17 @@ public class WorkActivity extends AppCompatActivity {
                         startActivity(costumerInfoAc);
                     }
                 });
+
+                if(sharedPrefs.contains(viewHolder.customerName.getText().toString()))
+                {
+                    viewHolder.timeSwitch.setChecked(true);
+                }
+
                 convertView.setTag(viewHolder);
             }
             else
             {
-                mainViewHolder= (ViewHolder) convertView.getTag();
+                mainViewHolder = (ViewHolder) convertView.getTag();
                 mainViewHolder.customerName.setText(getItem(position));
             }
             return convertView;
@@ -241,5 +282,8 @@ public class WorkActivity extends AppCompatActivity {
         Switch timeSwitch;
         Button customerName;
     }
+
+
+
 
 }

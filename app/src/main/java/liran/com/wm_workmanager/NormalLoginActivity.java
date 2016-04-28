@@ -3,6 +3,7 @@ package liran.com.wm_workmanager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,8 @@ public class NormalLoginActivity extends Activity {
     private Intent workAc;
     private Context context;
     private Utils loginUtils;
+    private SharedPreferences sharedPrefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class NormalLoginActivity extends Activity {
 
         workAc = new Intent(this, WorkActivity.class);
         context=this;
+        sharedPrefs=this.getSharedPreferences("userSharedPrefs", 0);
+
    /*     if(editCode.getText().toString().equals("code")){
             WorkActivity.is_login = WorkActivity.NORMAL_LOGIN;
             startActivity(workAc);
@@ -72,12 +77,13 @@ public class NormalLoginActivity extends Activity {
 
             public void onResponse(JSONObject response) {
                 try {
-                    WorkActivity.is_login=WorkActivity.NORMAL_LOGIN;
+                    SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
+                    editor.putInt(Utils.isLogin, WorkActivity.NORMAL_LOGIN);
+                    editor.commit();
                     workAc.putExtra("user", response.getString("user"));
                     startActivity(workAc);
 
                 } catch (Exception e) {
-                    Log.i("test", "errorr");
                     e.printStackTrace();
 
                 }

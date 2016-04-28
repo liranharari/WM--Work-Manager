@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -33,6 +34,8 @@ public class SignInActivity extends Activity {
     private final String GETCODES_URL = "http://workmanager-2016.appspot.com/api/getcodes?";
     private Context context;
     private Intent workAc;
+    private SharedPreferences sharedPrefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class SignInActivity extends Activity {
         signIn= (Button) findViewById(R.id.btn_save_sign_in);
 
         context=this;
+        sharedPrefs=this.getSharedPreferences("userSharedPrefs", 0);
 
 
         workAc=new Intent(this, WorkActivity.class);
@@ -102,13 +106,12 @@ public class SignInActivity extends Activity {
 
             public void onResponse(JSONObject response) {
                 try {
-                    Log.i("test", "good");
-                    Toast.makeText(getApplicationContext(), response.getString("status"), Toast.LENGTH_LONG).show();
-                    WorkActivity.is_login=WorkActivity.MANAGER_LOGIN;
+                    SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
+                    editor.putInt(Utils.isLogin, WorkActivity.MANAGER_LOGIN);
+                    editor.commit();
                     showCodeAlertDialog(mail);
 
                 } catch (Exception e) {
-                    Log.i("test", "errorr");
                     e.printStackTrace();
 
                 }

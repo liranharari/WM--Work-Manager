@@ -2,6 +2,7 @@ package liran.com.wm_workmanager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,8 @@ public class ManagerLoginActivity extends AppCompatActivity {
     private final String LOGIN_URL = "http://workmanager-2016.appspot.com/api/loginManager?";
     private Intent workAc;
     private Context context;
+    private SharedPreferences sharedPrefs;
+
 
 
     @Override
@@ -37,6 +40,8 @@ public class ManagerLoginActivity extends AppCompatActivity {
 
         workAc = new Intent(this, WorkActivity.class);
         context=this;
+        sharedPrefs=this.getSharedPreferences("userSharedPrefs", 0);
+
 
         editUsername= (EditText) findViewById(R.id.editUsernmae);
         editPassword= (EditText) findViewById(R.id.editPassword);
@@ -82,13 +87,13 @@ public class ManagerLoginActivity extends AppCompatActivity {
 
             public void onResponse(JSONObject response) {
                 try {
-                    Log.i("test", "good");
-                    WorkActivity.is_login=WorkActivity.MANAGER_LOGIN;
+                    SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
+                    editor.putInt(Utils.isLogin, WorkActivity.MANAGER_LOGIN);
+                    editor.commit();
                     workAc.putExtra("user", mail);
                     startActivity(workAc);
 
                 } catch (Exception e) {
-                    Log.i("test", "errorr");
                     e.printStackTrace();
 
                 }

@@ -13,6 +13,7 @@ public class Utils {
     public static final String sharedPrefsName = "userSharedPrefs";
     //shared preferences keys
     public static final String userName = "userName";
+    public static final String isLogin = "isLogin";
 
     public static ProgressDialog dialog;
 
