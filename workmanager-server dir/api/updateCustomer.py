@@ -39,6 +39,7 @@ class addCustomerhours(webapp2.RequestHandler):
 	def get(self):
 		mail=self.request.get('mail')
 		name=self.request.get('name')
+		type=self.request.get('type')
 		hoursToAdd=self.request.get('hourstoadd')
 		
 		user = User.query(User.mail == mail).get()
@@ -52,7 +53,14 @@ class addCustomerhours(webapp2.RequestHandler):
 			self.response.write('no customer')
 			return
 			
-		Customer.updateCustomerHours(mail, name, int(hoursToAdd))
+		if type== 'manager':
+			Customer.updateCustomerManagerHours(mail, name, int(hoursToAdd))
+		elif type== 'worker':
+			Customer.updateCustomerWorkerHours(mail, name, int(hoursToAdd))
+		else:
+			self.error(402)
+			self.response.write('error')
+			return
 
 		self.response.write(json.dumps({"status": "OK"}))
 

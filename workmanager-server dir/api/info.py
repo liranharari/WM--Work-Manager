@@ -48,6 +48,7 @@ class getCustomerInfo(webapp2.RequestHandler):
 		template_params['field3']=customer.field3
 		template_params['field4']=customer.field4
 		template_params['field5']=customer.field5
+		template_params['field6']=customer.field6
 		self.response.write(json.dumps(template_params))
 
 class getUserCustomers(webapp2.RequestHandler):

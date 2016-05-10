@@ -18,7 +18,9 @@ class addCustomer(webapp2.RequestHandler):
 		field3=self.request.get('field3')
 		field4=self.request.get('field4')
 		field5=self.request.get('field5')
-		hours=0
+		field6=self.request.get('field6')
+		managertime=0
+		workertime=0
 		
 		user = User.query(User.mail == mail).get()
 		if not user:
@@ -43,7 +45,9 @@ class addCustomer(webapp2.RequestHandler):
 		customer.field3=field3
 		customer.field4=field4
 		customer.field5=field5
-		customer.hours=hours
+		customer.field6=field6
+		customer.managertime=managertime
+		customer.workertime=workertime
 		customer.put()
 		self.response.write(json.dumps({"status": "OK"}))
 
