@@ -40,6 +40,8 @@ import static java.lang.Thread.sleep;
 public class WorkActivity extends AppCompatActivity {
     public final static int NORMAL_LOGIN=2, MANAGER_LOGIN=1, NOT_LOGIN=0;
     private final String GET_CUSTOMERS_URL = "http://workmanager-2016.appspot.com/api/getusercustomers?";
+    private final String ADD_TIME_CUSTOMER_URL = "http://workmanager-2016.appspot.com/api/addcustomerhours?";
+    private final double TO_MINS=0.000016667;
 
     public String user;
     private Button btn_add_costumer;
@@ -212,6 +214,7 @@ public class WorkActivity extends AppCompatActivity {
             ViewHolder mainViewHolder= null;
             if(convertView== null)
             {
+                Log.i("testing", "enter get view");
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView= inflater.inflate(layout, parent, false);
                 final ViewHolder viewHolder= new ViewHolder();
@@ -219,33 +222,29 @@ public class WorkActivity extends AppCompatActivity {
                 viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         //Toast.makeText(getApplicationContext(), "time switch is: "+isChecked, Toast.LENGTH_LONG).show();
-
+                        Log.i("testing", "enter pressed: "+ viewHolder.customerName.getText().toString());
                         if(isChecked==true)//time not running- start time!
                         {
                             if(sharedPrefs.contains(viewHolder.customerName.getText().toString()))
                                 return;
                             long startTime = System.currentTimeMillis();
-
+                            Toast.makeText(getApplicationContext(), "pressed: "+viewHolder.customerName.getText().toString(), Toast.LENGTH_LONG).show();
                             SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
                             editor.putLong(viewHolder.customerName.getText().toString(), startTime);
                             editor.commit();
                         }
                         if(isChecked==false)//time running - stop time!
                         {
-                            /*if(sharedPrefs.contains(viewHolder.customerName.getText().toString()))
-                                return;*/
+                            if(!sharedPrefs.contains(viewHolder.customerName.getText().toString()))
+                                return;
                             long time= System.currentTimeMillis() - sharedPrefs.getLong(viewHolder.customerName.getText().toString(), 0);
-                            Toast.makeText(getApplicationContext(), "time is: "+time*0.001, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "time is: "+time*0.001+" for: "+viewHolder.customerName.getText().toString(), Toast.LENGTH_LONG).show();
                             editor.remove(viewHolder.customerName.getText().toString());
                             editor.commit();
-                           /* getTime(viewHolder.timeSwitch.getText().toString(), )
-                            String[] time = viewHolder.timeSwitch.getText().toString().split(":");
-                            int hour =Integer.parseInt(time[0]);
-                            int minute =Integer.parseInt( time[1]);
-                            long starttime=Long.valueOf(viewHolder.timeSwitch.getText().toString());
-                            long time=System.currentTimeMillis()-starttime;
-                            Toast.makeText(getApplicationContext(), "time : "+(int) ((time / (1000*60)) % 60), Toast.LENGTH_LONG).show();
-*/
+                            Log.i("testing", "(need false) remove? "+ sharedPrefs.contains(viewHolder.customerName.getText().toString()));
+
+                            addTimeToCustomer((int)(time*TO_MINS), viewHolder.customerName.getText().toString());
+
                         }
                         // do something, the isChecked will be
                         // true if the switch is in the On position
@@ -273,6 +272,14 @@ public class WorkActivity extends AppCompatActivity {
             {
                 mainViewHolder = (ViewHolder) convertView.getTag();
                 mainViewHolder.customerName.setText(getItem(position));
+                Log.i("testing", "enter else... " );
+                if(sharedPrefs.contains(mainViewHolder.customerName.getText().toString()))
+                {
+                    mainViewHolder.timeSwitch.setChecked(true);
+                }
+                else
+                    mainViewHolder.timeSwitch.setChecked(false);
+
             }
             return convertView;
         }
@@ -281,6 +288,42 @@ public class WorkActivity extends AppCompatActivity {
     public class ViewHolder {
         Switch timeSwitch;
         Button customerName;
+    }
+
+
+
+    private void addTimeToCustomer(int time, String customer){
+
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ADD_TIME_CUSTOMER_URL +"mail="+user+
+                "&name="+customer+
+                "&hourstoadd="+time;
+
+        url = url.replaceAll(" ", "%20");
+
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
+            @Override
+
+            public void onResponse(JSONObject response) {
+                try {
+                    Toast.makeText(getApplicationContext(), "הזמן נשמר", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+                Utils.cancelProgressDialog();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Utils.cancelProgressDialog();
+                Toast.makeText(getApplicationContext(), "שגיאה", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        queue.add(request);
+
     }
 
 
