@@ -5,7 +5,12 @@
     android:descendantFocusability="blocksDescendants">
 
 
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        style="@style/btn_costumer_style"
+        android:onClick="costumerButtonClicked"
+        android:id="@+id/list_item_btn" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -16,12 +21,7 @@
         android:thumb="@drawable/switch_holo_light"
         android:textSize="10sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        style="@style/btn_costumer_style"
-        android:onClick="costumerButtonClicked"
-        android:id="@+id/list_item_btn" />
+
 
     <!--style="@style/btn_start_style"-->
 

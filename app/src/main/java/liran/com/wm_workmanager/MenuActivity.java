@@ -1,6 +1,7 @@
 package liran.com.wm_workmanager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 public class MenuActivity extends Activity {
 
     private Button btnWorkStatus, btnMakeReminder, btnSendReminder, btnOptions;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,14 @@ public class MenuActivity extends Activity {
 
 
         final Intent WorkStatusAc = new Intent(this, WorkStatusActivity.class);
+
+        if(getIntent().getStringExtra("user")!=null)
+            user = getIntent().getStringExtra("user");
+        else
+            Toast.makeText(getApplicationContext(), "errrororo", Toast.LENGTH_LONG).show();
+
+
+
 
 
         btnWorkStatus= (Button) findViewById(R.id.btn_work_status);
@@ -33,6 +43,7 @@ public class MenuActivity extends Activity {
         btnWorkStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WorkStatusAc.putExtra("user", user);
                 startActivity(WorkStatusAc);
             }
         });

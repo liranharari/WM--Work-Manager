@@ -109,6 +109,7 @@ public class WorkActivity extends AppCompatActivity {
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                menuAc.putExtra("user", user);
                 startActivity(menuAc);
 
             }
@@ -132,7 +133,7 @@ public class WorkActivity extends AppCompatActivity {
         super.onResume();
 
         user = sharedPrefs.getString(Utils.userName, "");
-       // Toast.makeText(context, "user resumed: "+ user, Toast.LENGTH_SHORT).show();
+       Toast.makeText(context, "user resumed: "+ user, Toast.LENGTH_SHORT).show();
         customersListUtils.showProgressDialog(this, "מעלה לקוחות...");
         CustomerListForUser(user);
 
@@ -192,14 +193,6 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
-    /*public void costumerButtonClicked(View view) {
-
-
-        if (view.getId() == R.id.btn1) {
-            startActivity(costumerInfoAc);
-    */
-
-
 
     private class MyListAdapter extends ArrayAdapter<String>
     {
@@ -214,7 +207,6 @@ public class WorkActivity extends AppCompatActivity {
             ViewHolder mainViewHolder= null;
             if(convertView== null)
             {
-                Log.i("testing", "enter get view");
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView= inflater.inflate(layout, parent, false);
                 final ViewHolder viewHolder= new ViewHolder();
@@ -222,13 +214,11 @@ public class WorkActivity extends AppCompatActivity {
                 viewHolder.timeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         //Toast.makeText(getApplicationContext(), "time switch is: "+isChecked, Toast.LENGTH_LONG).show();
-                        Log.i("testing", "enter pressed: "+ viewHolder.customerName.getText().toString());
                         if(isChecked==true)//time not running- start time!
                         {
                             if(sharedPrefs.contains(viewHolder.customerName.getText().toString()))
                                 return;
                             long startTime = System.currentTimeMillis();
-                            Toast.makeText(getApplicationContext(), "pressed: "+viewHolder.customerName.getText().toString(), Toast.LENGTH_LONG).show();
                             SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
                             editor.putLong(viewHolder.customerName.getText().toString(), startTime);
                             editor.commit();
@@ -241,9 +231,8 @@ public class WorkActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "time is: "+time*0.001+" for: "+viewHolder.customerName.getText().toString(), Toast.LENGTH_LONG).show();
                             editor.remove(viewHolder.customerName.getText().toString());
                             editor.commit();
-                            Log.i("testing", "(need false) remove? "+ sharedPrefs.contains(viewHolder.customerName.getText().toString()));
 
-                            addTimeToCustomer((int)(time*TO_MINS), viewHolder.customerName.getText().toString());
+                            addTimeToCustomer((int)(time*TO_MINS), viewHolder.customerName.getText().toString(), sharedPrefs.getInt(Utils.isLogin, 0));
 
                         }
                         // do something, the isChecked will be
@@ -272,7 +261,6 @@ public class WorkActivity extends AppCompatActivity {
             {
                 mainViewHolder = (ViewHolder) convertView.getTag();
                 mainViewHolder.customerName.setText(getItem(position));
-                Log.i("testing", "enter else... " );
                 if(sharedPrefs.contains(mainViewHolder.customerName.getText().toString()))
                 {
                     mainViewHolder.timeSwitch.setChecked(true);
@@ -292,13 +280,18 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
-    private void addTimeToCustomer(int time, String customer){
+    private void addTimeToCustomer(int time, String customer, int type){
 
-
+        String strType="";
+        if(type== MANAGER_LOGIN)
+            strType="manager";
+        else if(type== NORMAL_LOGIN)
+            strType="worker";
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ADD_TIME_CUSTOMER_URL +"mail="+user+
                 "&name="+customer+
-                "&hourstoadd="+time;
+                "&hourstoadd="+time+
+                "&type="+strType;
 
         url = url.replaceAll(" ", "%20");
 
