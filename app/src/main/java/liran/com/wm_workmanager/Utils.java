@@ -14,6 +14,7 @@ public class Utils {
     //shared preferences keys
     public static final String userName = "userName";
     public static final String isLogin = "isLogin";
+    public static final String alarmIndex = "alarmIndex";
 
     public static ProgressDialog dialog;
 

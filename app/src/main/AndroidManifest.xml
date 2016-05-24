@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="liran.com.wm_workmanager" >
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +40,7 @@
         </activity>
         <activity android:name=".NormalLoginActivity" >
         </activity>
+        <receiver android:name=".ReminderAlarmReceiver"></receiver>
     </application>
 
 </manifest>

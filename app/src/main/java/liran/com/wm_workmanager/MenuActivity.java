@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MenuActivity extends Activity {
 
     private Button btnWorkStatus, btnMakeReminder, btnSendReminder, btnOptions;
     private String user;
+    private ArrayList<String> customers;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,8 @@ public class MenuActivity extends Activity {
         else
             Toast.makeText(getApplicationContext(), "errrororo", Toast.LENGTH_LONG).show();
 
-
+        if(getIntent().getStringArrayListExtra("customerList") != null)
+            customers= getIntent().getStringArrayListExtra("customerList");
 
 
 
@@ -52,6 +57,8 @@ public class MenuActivity extends Activity {
         btnMakeReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MakeReAc.putExtra("user", user);
+                MakeReAc.putStringArrayListExtra("customerList", customers);
                 startActivity(MakeReAc);
             }
         });
@@ -59,6 +66,7 @@ public class MenuActivity extends Activity {
         btnSendReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SendReAc.putStringArrayListExtra("customerList", customers);
                 startActivity(SendReAc);
 
             }

@@ -110,6 +110,7 @@ public class WorkActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 menuAc.putExtra("user", user);
+                menuAc.putStringArrayListExtra("customerList", customers);
                 startActivity(menuAc);
 
             }
