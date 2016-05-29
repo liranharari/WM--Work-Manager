@@ -66,6 +66,7 @@ public class MenuActivity extends Activity {
         btnSendReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SendReAc.putExtra("user", user);
                 SendReAc.putStringArrayListExtra("customerList", customers);
                 startActivity(SendReAc);
 

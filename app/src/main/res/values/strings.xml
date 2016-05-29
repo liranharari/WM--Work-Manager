@@ -42,6 +42,9 @@
     <string name="field4">שדה 4:</string>
     <string name="field5">שדה 5:</string>
     <string name="field6">שדה 6:</string>
+    <string name="sendReminderSMS">שלח תזכורת בSMS</string>
+    <string name="sendReminderMail">שלח תזכורת במייל</string>
+
 
 
 

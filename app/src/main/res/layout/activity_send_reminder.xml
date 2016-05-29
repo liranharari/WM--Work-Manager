@@ -47,10 +47,22 @@
                     android:background="@color/whiteVeryOpacity" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                android:layout_width="@dimen/abc_search_view_text_min_width"
+                android:layout_height="wrap_content"
+                android:text="@string/sendReminderSMS"
+                android:id="@+id/btnSendReminderSMS"
+                android:layout_marginBottom="0dp"
+                android:layout_alignBottom="@+id/scrollView2"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                style="@style/btn_edit_style" />
+
+                <Button
+                    android:layout_width="@dimen/abc_search_view_text_min_width"
                     android:layout_height="wrap_content"
-                    android:text="@string/makeReminder"
-                    android:id="@+id/btnSendReminder"
+                    android:text="@string/sendReminderMail"
+                    android:id="@+id/btnSendReminderMail"
                     android:layout_marginBottom="0dp"
                     android:layout_alignBottom="@+id/scrollView2"
                     android:layout_centerHorizontal="true"

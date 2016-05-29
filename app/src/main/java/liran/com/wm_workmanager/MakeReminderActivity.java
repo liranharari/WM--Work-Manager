@@ -54,44 +54,38 @@ public class MakeReminderActivity extends Activity {
     Context context;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reminder);
 
-        inst=this;
+        inst = this;
 
-        if(getIntent().getStringExtra("user")!=null)
+        if (getIntent().getStringExtra("user") != null)
             user = getIntent().getStringExtra("user");
         else
             Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
 
-        ArrayList<String> arrayLCus=null;
-        if(getIntent().getStringArrayListExtra("customerList") != null)
-            arrayLCus=getIntent().getStringArrayListExtra("customerList");
 
-        for (String c:arrayLCus) {
 
-            costumerList.add(c.toString());
-        }
+        getCustomersFromExtra();
 
-        context=this;
+        context = this;
         sharedPrefs = Utils.getSharedPreferences(this);
 
 
-        final Calendar cal =Calendar.getInstance();
-        remYear=cal.get(Calendar.YEAR);
-        remMonth=cal.get(Calendar.MONTH);
-        remDay=cal.get(Calendar.DAY_OF_MONTH);
+        final Calendar cal = Calendar.getInstance();
+        remYear = cal.get(Calendar.YEAR);
+        remMonth = cal.get(Calendar.MONTH);
+        remDay = cal.get(Calendar.DAY_OF_MONTH);
         remHour = cal.get(Calendar.HOUR_OF_DAY);
         remMinute = cal.get(Calendar.MINUTE);
 
-        Log.i("alarm", "year:"+remYear+ " month:"+ remMonth+" day:"+ remDay);
+        Log.i("alarm", "year:" + remYear + " month:" + remMonth + " day:" + remDay);
 
         spinCostumer = (Spinner) findViewById(R.id.spinner_costumer);
         msgEdit = (EditText) findViewById(R.id.editTxtReminderMessage);
-        btnSaveReminder=(Button) findViewById(R.id.btn_save_reminder);
+        btnSaveReminder = (Button) findViewById(R.id.btn_save_reminder);
 
         createSpinCostumer();
 
@@ -122,11 +116,8 @@ public class MakeReminderActivity extends Activity {
                         PendingIntent.getBroadcast(context, sharedPrefs.getInt(Utils.alarmIndex, 0), alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
 
-
-
-
-                Toast.makeText(getBaseContext(), "reminder saved to the "+remDay+"/"+remMonth+"/"+ remYear+"\n"+
-                                        "at " +remHour + ":" + remMinute , Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "reminder saved to the " + remDay + "/" + remMonth + "/" + remYear + "\n" +
+                        "at " + remHour + ":" + remMinute, Toast.LENGTH_LONG).show();
                 //onBackPressed();
             }
         });
@@ -235,4 +226,14 @@ public class MakeReminderActivity extends Activity {
     }
 
 
+    public void getCustomersFromExtra() {
+        ArrayList<String> arrayLCus = null;
+        if (getIntent().getStringArrayListExtra("customerList") != null)
+            arrayLCus = getIntent().getStringArrayListExtra("customerList");
+
+        for (String c : arrayLCus) {
+
+            costumerList.add(c.toString());
+        }
+    }
 }
