@@ -10,6 +10,7 @@
     <color name="greyOpacity">#19413c3c</color>
     <color name="greenOpacity">#4115ff00</color>
     <color name="blueOpacity">#7200b2ff</color>
+    <color name="redOpacity">#72ff0004</color>
     <color name="greenOpacity2">#7200ff0d</color>
     <color name="greenOpacity3">#bb00ff0d</color>
     <color name="background">#e4e4e4</color>

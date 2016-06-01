@@ -44,6 +44,7 @@
     <string name="field6">שדה 6:</string>
     <string name="sendReminderSMS">שלח תזכורת בSMS</string>
     <string name="sendReminderMail">שלח תזכורת במייל</string>
+    <string name="logout">התנתק</string>
 
 
 

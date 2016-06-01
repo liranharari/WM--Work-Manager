@@ -42,4 +42,13 @@
         android:id="@+id/btn_options"
         android:layout_below="@+id/btn_send_reminder"
         />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/btn_menu_logout_style"
+        android:text="@string/logout"
+        android:id="@+id/btn_logout"
+        android:layout_below="@+id/btn_options"
+        />
 </RelativeLayout>

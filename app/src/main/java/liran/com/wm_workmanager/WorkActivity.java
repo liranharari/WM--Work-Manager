@@ -192,8 +192,11 @@ public class WorkActivity extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 
     private class MyListAdapter extends ArrayAdapter<String>
     {
