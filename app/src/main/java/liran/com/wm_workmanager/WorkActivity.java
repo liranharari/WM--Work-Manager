@@ -39,6 +39,7 @@ import static java.lang.Thread.sleep;
 
 public class WorkActivity extends AppCompatActivity {
     public final static int NORMAL_LOGIN=2, MANAGER_LOGIN=1, NOT_LOGIN=0;
+    public final static String APP_MAIL="wmanagerapp@gmail.com", APP_MAIL_P="theworkmanagerpassword";
     private final String GET_CUSTOMERS_URL = "http://workmanager-2016.appspot.com/api/getusercustomers?";
     private final String ADD_TIME_CUSTOMER_URL = "http://workmanager-2016.appspot.com/api/addcustomerhours?";
     private final double TO_MINS=0.000016667;

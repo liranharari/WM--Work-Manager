@@ -3,6 +3,7 @@ package liran.com.wm_workmanager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,7 +56,8 @@ public class WorkStatusActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                sendHoursToMail(txtWorkStatus.getText().toString());
+                new RetrieveFeedTask().execute();                //sendMail();
+                //sendHoursToMail(txtWorkStatus.getText().toString());
                 Toast.makeText(getApplicationContext(), "הדוח נשלח", Toast.LENGTH_LONG).show();
             }
         });
@@ -105,18 +107,49 @@ public class WorkStatusActivity extends Activity {
     }
 
 
-
+/*
     private void sendHoursToMail(String msg)
     {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
         i.putExtra(Intent.EXTRA_EMAIL  , new String[]{user});
         i.putExtra(Intent.EXTRA_SUBJECT, "סטטוס עבודה - "+ new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-        i.putExtra(Intent.EXTRA_TEXT   , "עבודה שנרשמה דרך "+ "Work Manager application\n\n"+msg);
+        i.putExtra(Intent.EXTRA_TEXT, "עבודה שנרשמה דרך " + "Work Manager application\n\n" + msg);
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(context, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }*/
+
+
+    private void sendMail()
+    {
+        Log.i("SendMail", "enter");
+
+        try {
+            GMailSender sender = new GMailSender(WorkActivity.APP_MAIL, WorkActivity.APP_MAIL_P);
+            sender.sendMail("סטטוס עבודה - "+ new SimpleDateFormat("dd-MM-yyyy").format(new Date()),
+                    "עבודה שנרשמה דרך " + "Work Manager application\n\n" + txtWorkStatus.getText().toString(),
+                    WorkActivity.APP_MAIL,
+                    user); //user!!!!!!!!!!
+        } catch (Exception e) {
+            Log.e("SendMail", e.getMessage(), e);
+        }
+
+    }
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, Void> {
+
+        private Exception exception;
+
+        protected Void doInBackground(String... urls) {
+            sendMail();
+            return null;
+        }
+
+        protected void onPostExecute() {
+
         }
     }
 }
