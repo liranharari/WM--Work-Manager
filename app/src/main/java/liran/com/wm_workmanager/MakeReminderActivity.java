@@ -211,7 +211,6 @@ public class MakeReminderActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 costumer = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position).toString() + "", Toast.LENGTH_LONG).show();
             }
 
             @Override

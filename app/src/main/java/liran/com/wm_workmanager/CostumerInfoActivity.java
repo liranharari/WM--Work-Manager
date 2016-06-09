@@ -97,19 +97,19 @@ public class CostumerInfoActivity extends AppCompatActivity {
                     address="כתובת: "  +  response.getString("address");
                     phone= "טלפון: " + response.getString("phone");
                     mail= "מייל: " + response.getString("email");
-                    f1= f1+ response.getString("field1");
-                    f2= f2+ response.getString("field2");
-                    f3= f3+ response.getString("field3");
-                    f4= f4+ response.getString("field4");
-                    f5= f5+ response.getString("field5");
-                    f6= f6+ response.getString("field6");
+                    if(!f1.equals(": "))f1= f1+ response.getString("field1");
+                    else f1="";
+                    if(!f2.equals(": "))f2= f2+ response.getString("field2");
+                    else f2="";
+                    if(!f3.equals(": "))f3= f3+ response.getString("field3");
+                    else f3="";
+                    if(!f4.equals(": "))f4= f4+ response.getString("field4");
+                    else f4="";
+                    if(!f5.equals(": "))f5= f5+ response.getString("field5");
+                    else f5="";
+                    if(!f6.equals(": "))f6= f6+ response.getString("field6");
+                    else f6="";
 
-                    if(f1==null)f1="";
-                    if(f2==null)f2="";
-                    if(f3==null)f3="";
-                    if (f4 == null) f4 = "";
-                    if (f5 == null) f5 = "";
-                    if (f6 == null) f6 = "";
 
                     txtcostumerInfo.setText(name+ "\n" + address +"\n" + phone+"\n" +
                             mail+"\n" +f1+"\n" +f2+"\n" +f3+"\n" +f4+"\n" +f5+"\n" +f6);

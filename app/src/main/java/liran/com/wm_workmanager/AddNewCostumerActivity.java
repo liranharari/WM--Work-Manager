@@ -111,7 +111,8 @@ public class AddNewCostumerActivity extends Activity {
                     txtfield3.setText(response.getJSONArray("fields").getJSONObject(0).getString("field3")+":");
                     txtfield4.setText(response.getJSONArray("fields").getJSONObject(0).getString("field4")+":");
                     txtfield5.setText(response.getJSONArray("fields").getJSONObject(0).getString("field5")+":");
-                    txtfield6.setText(response.getJSONArray("fields").getJSONObject(0).getString("field6")+":");
+                    txtfield6.setText(response.getJSONArray("fields").getJSONObject(0).getString("field6") + ":");
+                    hideEmpty();
 
 
                 } catch (Exception e) {
@@ -132,6 +133,34 @@ public class AddNewCostumerActivity extends Activity {
             }
         });
         queue.add(request);
+    }
+
+    private void hideEmpty()
+    {
+        if(txtfield1.getText().toString().equals(":")) {
+            txtfield1.setVisibility(View.GONE);
+            editfield1.setVisibility(View.GONE);
+        }
+        if(txtfield2.getText().toString().equals(":")) {
+            txtfield2.setVisibility(View.GONE);
+            editfield2.setVisibility(View.GONE);
+        }
+        if(txtfield3.getText().toString().equals(":")) {
+            txtfield3.setVisibility(View.GONE);
+            editfield3.setVisibility(View.GONE);
+        }
+        if(txtfield4.getText().toString().equals(":")) {
+            txtfield4.setVisibility(View.GONE);
+            editfield4.setVisibility(View.GONE);
+        }
+        if(txtfield5.getText().toString().equals(":")) {
+            txtfield5.setVisibility(View.GONE);
+            editfield5.setVisibility(View.GONE);
+        }
+        if(txtfield6.getText().toString().equals(":")) {
+            txtfield6.setVisibility(View.GONE);
+            editfield6.setVisibility(View.GONE);
+        }
     }
 
     private void addNewCustomer()
@@ -158,7 +187,8 @@ public class AddNewCostumerActivity extends Activity {
             public void onResponse(JSONObject response) {
                 try {
                     Toast.makeText(getApplicationContext(), "הלקוח נוסף לרשימת הלקוחות", Toast.LENGTH_LONG).show();
-                    onBackPressed();
+                    startActivity(new Intent(context, WorkActivity.class));
+                   // onBackPressed();
                 } catch (Exception e) {
                     e.printStackTrace();
 

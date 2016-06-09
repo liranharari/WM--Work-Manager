@@ -44,6 +44,8 @@ public class MenuActivity extends Activity {
 
         final Intent MakeReAc=new Intent(this, MakeReminderActivity.class);
         final Intent SendReAc=new Intent(this, SendReminderActivity.class);
+        final Intent optionAc=new Intent(this, OptionActivity.class);
+
 
 
 
@@ -86,7 +88,8 @@ public class MenuActivity extends Activity {
         btnOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                optionAc.putExtra("user", user);
+                startActivity(optionAc);
             }
         });
     }

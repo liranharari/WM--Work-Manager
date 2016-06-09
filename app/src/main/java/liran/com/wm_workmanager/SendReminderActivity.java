@@ -3,6 +3,7 @@ package liran.com.wm_workmanager;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,7 +69,9 @@ public class SendReminderActivity extends Activity {
         btnSendReminderMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMail(editMessage.getText().toString());
+                new RetrieveFeedTask().execute();                //sendMail();
+                //sendMail(editMessage.getText().toString());
+                Toast.makeText(getBaseContext(),"המייל נשלח", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
         });
@@ -83,19 +86,7 @@ public class SendReminderActivity extends Activity {
 
     }
 
-    private void sendMail(String msg)
-    {
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-        i.putExtra(Intent.EXTRA_SUBJECT, msg.subSequence(0, 5) + "....");
-        i.putExtra(Intent.EXTRA_TEXT, msg);
-        try {
-            startActivity(Intent.createChooser(i, "Send mail..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(getBaseContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 
     private void sendSMS(String msg)
     {
@@ -121,7 +112,7 @@ public class SendReminderActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 costumer = parent.getItemAtPosition(position).toString();
                 setPhoneAndEmail();
-                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position).toString() + "", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), parent.getItemAtPosition(position).toString() + "", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -174,6 +165,37 @@ public class SendReminderActivity extends Activity {
         for (String c : arrayLCus) {
 
             costumerList.add(c.toString());
+        }
+    }
+
+    private void sendMail()
+    {
+        Log.i("SendMail", "enter");
+
+        try {
+            GMailSender sender = new GMailSender(WorkActivity.APP_MAIL, WorkActivity.APP_MAIL_P);
+            sender.sendMail(editMessage.getText().toString().subSequence(0, 5) + "....",
+                    editMessage.getText().toString(),
+                    WorkActivity.APP_MAIL,
+                    mail); //user!!!!!!!!!!
+        } catch (Exception e) {
+            Log.e("SendMail", e.getMessage(), e);
+        }
+
+    }
+
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, Void> {
+
+        private Exception exception;
+
+        protected Void doInBackground(String... urls) {
+            sendMail();
+            return null;
+        }
+
+        protected void onPostExecute() {
+
         }
     }
 }

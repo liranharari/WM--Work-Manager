@@ -2,7 +2,6 @@ package liran.com.wm_workmanager;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +23,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class WorkStatusActivity extends Activity {
 
     private TextView txtWorkStatus;
@@ -34,10 +34,14 @@ public class WorkStatusActivity extends Activity {
     private Utils getCustomerHoursUtils;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_status);
+
+
 
         txtWorkStatus= (TextView) findViewById(R.id.textWorkStatus);
         btnSendToMail= (Button) findViewById(R.id.btn_send_to_email);
@@ -152,4 +156,7 @@ public class WorkStatusActivity extends Activity {
 
         }
     }
+
+
+
 }

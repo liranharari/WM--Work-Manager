@@ -1,8 +1,12 @@
 package liran.com.wm_workmanager;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.ArraySet;
@@ -29,10 +33,12 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 import static java.lang.Thread.sleep;
 
@@ -45,12 +51,15 @@ public class WorkActivity extends AppCompatActivity {
     private final double TO_MINS=0.000016667;
 
     public String user;
-    private Button btn_add_costumer;
+    private Button btn_add_costumer, btn_logout;
     private Button btn_menu;
     private ListView customersList; //the list of the customers
     private ArrayList<String> customers;
     Context context;
     private Utils customersListUtils;
+
+    private PendingIntent DailypendingIntent;
+    private AlarmManager dailyManager;
 
     final Intent loginAc = new Intent(this, MainActivity.class);
     private Intent costumerInfoAc;
@@ -70,6 +79,10 @@ public class WorkActivity extends AppCompatActivity {
         editor = Utils.getSharedPreferencesEditor(this);
         customers= new ArrayList<String>();
 
+
+
+
+
         if(getIntent().getStringExtra("user")==null)
             user = sharedPrefs.getString(Utils.userName, "");
         else {
@@ -79,7 +92,8 @@ public class WorkActivity extends AppCompatActivity {
             editor.apply();
         }
 
-       // Toast.makeText(context, "user:::"+ user, Toast.LENGTH_SHORT).show();
+
+        dailyReceiverInit(); // make the daily alarm to see if send monthly mail
 
         final Intent menuAc = new Intent(this, MenuActivity.class);
         final Intent AddNewCostumerAc = new Intent(this, AddNewCostumerActivity.class);
@@ -88,17 +102,10 @@ public class WorkActivity extends AppCompatActivity {
 
         btn_add_costumer=(Button) findViewById(R.id.btnAddcostumer);
         btn_menu=(Button) findViewById(R.id.btnMenu);
+        btn_logout=(Button) findViewById(R.id.workAcLogout);
         customersList= (ListView) findViewById(R.id.listViewCustomers);
 
-       // customersListUtils.showProgressDialog(this, "מעלה לקוחות...");
-       // CustomerListForUser(user);
 
-        /*try { //wait for the answer
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-       // customersList.setAdapter(new MyListAdapter(this, R.layout.single_customer_row, customers));
 
 
         if(sharedPrefs.getInt(Utils.isLogin, 0)!= MANAGER_LOGIN)
@@ -106,6 +113,8 @@ public class WorkActivity extends AppCompatActivity {
             btn_add_costumer.setVisibility(View.GONE);
             btn_menu.setVisibility(View.GONE);
         }
+        else
+            btn_logout.setVisibility(View.GONE);
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +134,43 @@ public class WorkActivity extends AppCompatActivity {
             }
         });
 
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AreYouSureLogout();
+            }
+        });
 
 
 
+
+    }
+
+
+    private void AreYouSureLogout()
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked >> logout
+                        SharedPreferences.Editor editor = getSharedPreferences("userSharedPrefs", MODE_PRIVATE).edit();
+                        editor.putInt(Utils.isLogin, WorkActivity.NOT_LOGIN);
+                        editor.commit();
+                        startActivity(new Intent(getBaseContext(), MainActivity.class));
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("האם להתנתק?").setPositiveButton("כן", dialogClickListener)
+                .setNegativeButton("לא", dialogClickListener).show();
     }
 
     @Override
@@ -135,7 +178,6 @@ public class WorkActivity extends AppCompatActivity {
         super.onResume();
 
         user = sharedPrefs.getString(Utils.userName, "");
-       Toast.makeText(context, "user resumed: "+ user, Toast.LENGTH_SHORT).show();
         customersListUtils.showProgressDialog(this, "מעלה לקוחות...");
         CustomerListForUser(user);
 
@@ -233,7 +275,6 @@ public class WorkActivity extends AppCompatActivity {
                             if(!sharedPrefs.contains(viewHolder.customerName.getText().toString()))
                                 return;
                             long time= System.currentTimeMillis() - sharedPrefs.getLong(viewHolder.customerName.getText().toString(), 0);
-                            Toast.makeText(getApplicationContext(), "time is: "+time*0.001+" for: "+viewHolder.customerName.getText().toString(), Toast.LENGTH_LONG).show();
                             editor.remove(viewHolder.customerName.getText().toString());
                             editor.commit();
 
@@ -323,6 +364,54 @@ public class WorkActivity extends AppCompatActivity {
         queue.add(request);
 
     }
+
+
+
+
+
+    public void dailyReceiverInit()
+    {
+        // Retrieve a PendingIntent that will perform a broadcast
+      /*  Intent alarmIntent = new Intent(this, DailyReceiver.class);
+        DailypendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        startAlarm();
+        */
+
+        // we know mobiletuts updates at right around 1130 GMT.
+        // let's grab new stuff at around 11:45 GMT, inexactly
+        Calendar updateTime = Calendar.getInstance();
+        updateTime.set(Calendar.AM_PM, Calendar.AM);
+        updateTime.set(Calendar.HOUR_OF_DAY, 1);
+        updateTime.set(Calendar.MINUTE, 0);
+
+        Intent downloader = new Intent(context, DailyReceiver.class);
+        downloader.putExtra("user", user);
+        PendingIntent recurringDownload = PendingIntent.getBroadcast(context,
+                0, downloader, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager alarms = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                updateTime.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, recurringDownload);
+    }
+
+  /*  public void startAlarm() {
+        dailyManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        long interval =86400000; // 24 hours
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+
+        dailyManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), interval, DailypendingIntent);
+        Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+    }
+
+    public void cancelAlarm() {
+        if (dailyManager != null) {
+            dailyManager.cancel(DailypendingIntent);
+            Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
+        }
+
+    }*/
 
 
 

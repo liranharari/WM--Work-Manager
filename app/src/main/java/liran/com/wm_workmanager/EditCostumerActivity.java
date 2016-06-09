@@ -95,6 +95,37 @@ public class EditCostumerActivity extends AppCompatActivity {
         txtF4.setText(getIntent().getStringExtra("f4Name"));
         txtF5.setText(getIntent().getStringExtra("f5Name"));
         txtF6.setText(getIntent().getStringExtra("f6Name"));
+
+        hideEmpty();
+    }
+
+
+    private void hideEmpty()
+    {
+        if(txtF1.getText().toString().equals("")) {
+            txtF1.setVisibility(View.GONE);
+            editF1.setVisibility(View.GONE);
+        }
+        if(txtF2.getText().toString().equals("")) {
+            txtF2.setVisibility(View.GONE);
+            editF2.setVisibility(View.GONE);
+        }
+        if(txtF3.getText().toString().equals("")) {
+            txtF3.setVisibility(View.GONE);
+            editF3.setVisibility(View.GONE);
+        }
+        if(txtF4.getText().toString().equals("")) {
+            txtF4.setVisibility(View.GONE);
+            editF4.setVisibility(View.GONE);
+        }
+        if(txtF5.getText().toString().equals("")) {
+            txtF5.setVisibility(View.GONE);
+            editF5.setVisibility(View.GONE);
+        }
+        if(txtF6.getText().toString().equals("")) {
+            txtF6.setVisibility(View.GONE);
+            editF6.setVisibility(View.GONE);
+        }
     }
 
 
